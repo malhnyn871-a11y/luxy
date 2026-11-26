@@ -192,11 +192,11 @@ class _ReelsScreenState extends State<ReelsScreen> {
               const SizedBox(height: 18),
               IconButton(
                 onPressed: onLike,
-                icon: Icon(liked ? Icons.favorite : Icons.favorite_border, color: liked ? Colors.red : Colors.white, size: 32),
+                icon: Icon(liked ? Icons.favorite : Icons.favorite, color: liked ? Colors.red : Colors.white, size: 32),
               ),
               Text('$likes', style: const TextStyle(color: Colors.white)),
               const SizedBox(height: 12),
-              IconButton(onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('التعليقات'))); }, icon: const Icon(Icons.comment, color: Colors.white, size: 32)),
+              IconButton(onPressed: () { showCommentsSheet(context); }, icon: const Stack(alignment: Alignment.center, children: [const Icon(Icons.chat_bubble, color: Colors.white, size: 34), Row(mainAxisSize: MainAxisSize.min, children: [Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle)), const SizedBox(width: 2), Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle)), const SizedBox(width: 2), Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle))])])),
               const Text('تعليق', style: TextStyle(color: Colors.white, fontSize: 11)),
               const SizedBox(height: 12),
               const SizedBox(height: 12),
@@ -470,6 +470,13 @@ class _SaveButtonState extends State<SaveButton> {
   bool saved = false;
   int count = 35;
   @override Widget build(BuildContext context) {
-    return Column(children: [IconButton(onPressed: () { setState(() { saved = !saved; count += saved ? 1 : -1; }); }, icon: Icon(saved ? Icons.bookmark : Icons.bookmark_border, color: saved ? Colors.yellow : Colors.white, size: 32)), Text('$count', style: const TextStyle(color: Colors.white)), const Text('حفظ', style: TextStyle(color: Colors.white, fontSize: 11))]);
+    return Column(children: [IconButton(onPressed: () { setState(() { saved = !saved; count += saved ? 1 : -1; }); }, icon: Icon(saved ? Icons.bookmark : Icons.bookmark, color: saved ? Colors.yellow : Colors.white, size: 32)), Text('$count', style: const TextStyle(color: Colors.white)), const Text('حفظ', style: TextStyle(color: Colors.white, fontSize: 11))]);
   }
+}
+
+
+void showCommentsSheet(BuildContext context) {
+  showModalBottomSheet(context: context, backgroundColor: Colors.grey[900], shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))), builder: (ctx) {
+    return Padding(padding: const EdgeInsets.all(16), child: Column(mainAxisSize: MainAxisSize.min, children: [Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10))), const SizedBox(height: 12), const Text('التعليقات', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)), const SizedBox(height: 12), const ListTile(leading: CircleAvatar(child: Text('س')), title: Text('سارة', style: TextStyle(color: Colors.white)), subtitle: Text('عاشت ايدك', style: TextStyle(color: Colors.white70))), const SizedBox(height: 8), const TextField(style: TextStyle(color: Colors.white), decoration: InputDecoration(hintText: 'اكتب تعليق...', hintStyle: TextStyle(color: Colors.white54), border: OutlineInputBorder(borderRadius: BorderRadius.circular(25))))]));
+  });
 }
