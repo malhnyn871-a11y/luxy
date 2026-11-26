@@ -192,7 +192,7 @@ class _ReelsScreenState extends State<ReelsScreen> {
               const SizedBox(height: 18),
               IconButton(
                 onPressed: onLike,
-                icon: Icon(liked ? Icons.favorite : Icons.favorite, color: liked ? Colors.red : Colors.white, size: 36),
+                icon: Icon(liked ? Icons.favorite : Icons.favorite, color: liked ? Colors.red : Colors.white, size: 44),
               ),
               Text('$likes', style: const TextStyle(color: Colors.white)),
               const SizedBox(height: 12),
@@ -201,7 +201,7 @@ class _ReelsScreenState extends State<ReelsScreen> {
               const SizedBox(height: 12),
               const SizedBox(height: 12),
               const SaveButton(),
-              IconButton(onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('مشاركة'))); }, icon: const Icon(Icons.send, color: Colors.white, size: 36)),
+              IconButton(onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('مشاركة'))); }, icon: const Icon(Icons.reply, color: Colors.white, size: 44)),
               const Text('مشاركة', style: TextStyle(color: Colors.white, fontSize: 11)),
             ],
           ),
@@ -470,7 +470,7 @@ class _SaveButtonState extends State<SaveButton> {
   bool saved = false;
   int count = 35;
   @override Widget build(BuildContext context) {
-    return Column(children: [IconButton(onPressed: () { setState(() { saved = !saved; count += saved ? 1 : -1; }); }, icon: Icon(saved ? Icons.bookmark : Icons.bookmark, color: saved ? Colors.yellow : Colors.white, size: 36)), Text('$count', style: const TextStyle(color: Colors.white)), const Text('حفظ', style: TextStyle(color: Colors.white, fontSize: 11))]);
+    return Column(children: [IconButton(onPressed: () { setState(() { saved = !saved; count += saved ? 1 : -1; }); }, icon: Icon(saved ? Icons.bookmark : Icons.bookmark, color: saved ? Colors.yellow : Colors.white, size: 44)), Text('$count', style: const TextStyle(color: Colors.white)), const Text('حفظ', style: TextStyle(color: Colors.white, fontSize: 11))]);
   }
 }
 
