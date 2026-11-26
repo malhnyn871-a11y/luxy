@@ -511,19 +511,3 @@ class _LuxyProfileTabsState extends State<LuxyProfileTabs> {
   }
 }
 
-class _LuxyProfileTabsState extends State<LuxyProfileTabs> {
-  int selected = 0;
-  final List<Map<String, dynamic>> tabs = [
-    {'icon': Icons.grid_on, 'label': 'فيديوهات'},
-    {'icon': Icons.favorite, 'label': 'لايكات'},
-    {'icon': Icons.bookmark, 'label': 'محفوظات'},
-    {'icon': Icons.lock, 'label': 'خاص'},
-    {'icon': Icons.repeat, 'label': 'إعادة'},
-  ];
-  @override Widget build(BuildContext context) {
-    return Column(children: [SingleChildScrollView(scrollDirection: Axis.horizontal, child: Row(children: List.generate(tabs.length, (i) {
-      bool active = selected == i;
-      return GestureDetector(onTap: () { setState(() { selected = i; }); }, child: Container(margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8), padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10), decoration: BoxDecoration(color: active ? Colors.red : Colors.grey[800], borderRadius: BorderRadius.circular(25)), child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(tabs[i]['icon'], color: Colors.white, size: 18), const SizedBox(width: 6), Text(tabs[i]['label'], style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13))])));
-    }))), const SizedBox(height: 8), Text('عرض: ${tabs[selected]['label']}', style: const TextStyle(color: Colors.white54, fontSize: 12))]);
-  }
-}
