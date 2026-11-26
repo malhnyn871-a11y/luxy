@@ -1,170 +1,460 @@
 import 'package:flutter/material.dart';
-void main() { runApp(const LuxyApp()); }
+
+void main() {
+  runApp(const LuxyApp());
+}
+
 class LuxyApp extends StatelessWidget {
   const LuxyApp({super.key});
-  @override Widget build(BuildContext context) { return MaterialApp(debugShowCheckedModeBanner: false, theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: Colors.black, appBarTheme: const AppBarTheme(backgroundColor: Colors.black)), home: const LoginScreen()); }
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
+      home: const LoginScreen(),
+    );
+  }
 }
-// ============ الدخول ============
-class LoginScreen extends StatelessWidget { const LoginScreen({super.key});
-  @override Widget build(BuildContext context) { return Scaffold(backgroundColor: Colors.black, body: Padding(padding: const EdgeInsets.all(24), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-    const Text('LUXY', style: TextStyle(fontSize: 52, fontWeight: FontWeight.bold, letterSpacing: 5)),
-    const SizedBox(height: 6), const Text('شاهد • انشر • استمتع', style: TextStyle(color: Colors.grey)),
-    const SizedBox(height: 35),
-    TextField(decoration: _dec('الإيميل أو رقم الهاتف', Icons.person)), const SizedBox(height: 12),
-    TextField(obscureText: true, decoration: _dec('كلمة السر', Icons.lock)),
-    const SizedBox(height: 8), Align(alignment: Alignment.centerLeft, child: TextButton(onPressed: () {}, child: const Text('نسيت كلمة السر؟', style: TextStyle(color: Colors.red)))),
-    const SizedBox(height: 10),
-    SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red, padding: const EdgeInsets.symmetric(vertical: 15), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MainNav())), child: const Text('دخول', style: TextStyle(color: Colors.white, fontSize: 18)))),
-    const SizedBox(height: 12),
-    SizedBox(width: double.infinity, child: OutlinedButton(style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MainNav())), child: const Text('دخول بحساب گوگل', style: TextStyle(color: Colors.white)))),
-    const SizedBox(height: 12),
-    SizedBox(width: double.infinity, child: OutlinedButton(style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), onPressed: () {}, child: const Text('دخول بحساب فيسبوك', style: TextStyle(color: Colors.white)))),
-    const SizedBox(height: 20),
-    Row(mainAxisAlignment: MainAxisAlignment.center, children: [const Text('ما عندك حساب؟ ', style: TextStyle(color: Colors.grey)), GestureDetector(onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterScreen())), child: const Text('انشاء حساب', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)))]),
-  ]))); }
-  static InputDecoration _dec(String h, IconData i) => InputDecoration(hintText: h, prefixIcon: Icon(i, color: Colors.grey), filled: true, fillColor: Colors.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none));
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('LUXY', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            const Text('شاهد - انشر - استمتع'),
+            const SizedBox(height: 30),
+            const TextField(decoration: InputDecoration(hintText: 'الايميل', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            const TextField(obscureText: true, decoration: InputDecoration(hintText: 'كلمة السر', border: OutlineInputBorder())),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainNav()));
+                },
+                child: const Text('دخول', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen()));
+              },
+              child: const Text('انشاء حساب جديد', style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
-// ============ التسجيل ============
-class RegisterScreen extends StatelessWidget { const RegisterScreen({super.key});
-  @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(title: const Text('انشاء حساب')), backgroundColor: Colors.black, body: SingleChildScrollView(padding: const EdgeInsets.all(24), child: Column(children: [
-    const Text('انضم للوكسي', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)), const SizedBox(height: 6), const Text('انشئ حسابك وابدأ النشر', style: TextStyle(color: Colors.grey)), const SizedBox(height: 24),
-    _f('الاسم الكامل', Icons.person), const SizedBox(height: 12),
-    _f('اسم المستخدم @', Icons.alternate_email), const SizedBox(height: 12),
-    _f('الإيميل', Icons.email), const SizedBox(height: 12),
-    _f('رقم الهاتف', Icons.phone), const SizedBox(height: 12),
-    _f('كلمة السر', Icons.lock), const SizedBox(height: 12),
-    _f('تأكيد كلمة السر', Icons.lock), const SizedBox(height: 14),
-    Row(children: const [Icon(Icons.check_box, color: Colors.red), SizedBox(width: 8), Expanded(child: Text('أوافق على الشروط والأحكام'))]), const SizedBox(height: 16),
-    SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red, padding: const EdgeInsets.symmetric(vertical: 15), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MainNav())), child: const Text('انشاء الحساب', style: TextStyle(color: Colors.white, fontSize: 18)))),
-  ]))); }
-  static Widget _f(String h, IconData i) => TextField(decoration: InputDecoration(hintText: h, prefixIcon: Icon(i, color: Colors.grey), filled: true, fillColor: Colors.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none)));
+
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('انشاء حساب')),
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          children: [
+            const TextField(decoration: InputDecoration(hintText: 'الاسم', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            const TextField(decoration: InputDecoration(hintText: 'الايميل', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            const TextField(obscureText: true, decoration: InputDecoration(hintText: 'كلمة السر', border: OutlineInputBorder())),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainNav()));
+                },
+                child: const Text('انشاء الحساب', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
-// ============ التنقل ============
-class MainNav extends StatefulWidget { const MainNav({super.key}); @override State<MainNav> createState() => _MainNavState(); }
-class _MainNavState extends State<MainNav> { int idx = 0; final pages = [const ReelsScreen(), const DiscoverScreen(), const UploadScreen(), const InboxScreen(), const ProfileScreen()];
-  @override Widget build(BuildContext context) { return Scaffold(body: pages[idx], bottomNavigationBar: BottomNavigationBar(currentIndex: idx, backgroundColor: Colors.black, selectedItemColor: Colors.red, unselectedItemColor: Colors.grey, type: BottomNavigationBarType.fixed, onTap: (i) => setState(() => idx = i), items: const [BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'), BottomNavigationBarItem(icon: Icon(Icons.search), label: 'اكتشاف'), BottomNavigationBarItem(icon: Icon(Icons.add_box, size: 32), label: 'رفع'), BottomNavigationBarItem(icon: Icon(Icons.inbox), label: 'الرسائل'), BottomNavigationBarItem(icon: Icon(Icons.person), label: 'حسابي')])); } }
-// ============ الريلز ============
-class Reel { final String name; final String user; final String desc; final Color color; bool liked; int likes; final List<String> comments; bool followed; Reel({required this.name, required this.user, required this.desc, required this.color, this.liked = false, required this.likes, required this.comments, this.followed = false}); }
-class ReelsScreen extends StatefulWidget { const ReelsScreen({super.key}); @override State<ReelsScreen> createState() => _ReelsScreenState(); }
+
+class MainNav extends StatefulWidget {
+  const MainNav({super.key});
+  @override
+  State<MainNav> createState() => _MainNavState();
+}
+
+class _MainNavState extends State<MainNav> {
+  int idx = 0;
+  final pages = [
+    const ReelsScreen(),
+    const DiscoverScreen(),
+    const UploadScreen(),
+    const InboxScreen(),
+    const ProfileScreen(),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: pages[idx],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: idx,
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
+        onTap: (i) {
+          setState(() {
+            idx = i;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'اكتشاف'),
+          BottomNavigationBarItem(icon: Icon(Icons.add_box), label: 'رفع'),
+          BottomNavigationBarItem(icon: Icon(Icons.inbox), label: 'الرسائل'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'حسابي'),
+        ],
+      ),
+    );
+  }
+}
+
+class ReelsScreen extends StatefulWidget {
+  const ReelsScreen({super.key});
+  @override
+  State<ReelsScreen> createState() => _ReelsScreenState();
+}
+
 class _ReelsScreenState extends State<ReelsScreen> {
-  final reels = [Reel(name: 'بارو', user: '@baro', desc: 'أول فيديو بلوكسي 🔥 #لوكسي #عراق', color: Colors.deepPurple, likes: 1240, comments: ['عاشت ايدك', 'وين هالمكان؟']), Reel(name: 'سارة', user: '@sara', desc: 'يومياتي ❤️', color: Colors.teal, likes: 890, comments: ['حلوو']), Reel(name: 'علي', user: '@ali', desc: 'تحدي جديد 💪', color: Colors.orange, likes: 2100, comments: ['قوي'])];
-  void showComments
-cat > lib/main.dart << 'EOF'
-import 'package:flutter/material.dart';
-void main() { runApp(const LuxyApp()); }
-class LuxyApp extends StatelessWidget {
-  const LuxyApp({super.key});
-  @override Widget build(BuildContext context) { return MaterialApp(debugShowCheckedModeBanner: false, theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: Colors.black), home: const LoginScreen()); }
+  int likes1 = 1240;
+  bool liked1 = false;
+  int likes2 = 890;
+  bool liked2 = false;
+  @override
+  Widget build(BuildContext context) {
+    return PageView(
+      scrollDirection: Axis.vertical,
+      children: [
+        _reel('بارو', '@baro', 'اول فيديو بلوكسي', Colors.deepPurple, likes1, liked1, () {
+          setState(() {
+            liked1 = !liked1;
+            if (liked1) {
+              likes1++;
+            } else {
+              likes1--;
+            }
+          });
+        }),
+        _reel('سارة', '@sara', 'يومياتي', Colors.teal, likes2, liked2, () {
+          setState(() {
+            liked2 = !liked2;
+            if (liked2) {
+              likes2++;
+            } else {
+              likes2--;
+            }
+          });
+        }),
+      ],
+    );
+  }
+
+  Widget _reel(String name, String user, String desc, Color color, int likes, bool liked, VoidCallback onLike) {
+    return Stack(
+      children: [
+        Container(
+          color: color,
+          child: const Center(
+            child: Icon(Icons.play_circle_fill, size: 80, color: Colors.white60),
+          ),
+        ),
+        Positioned(
+          right: 12,
+          bottom: 90,
+          child: Column(
+            children: [
+              CircleAvatar(radius: 27, child: Text(name[0])),
+              const SizedBox(height: 18),
+              IconButton(
+                onPressed: onLike,
+                icon: Icon(liked ? Icons.favorite : Icons.favorite_border, color: liked ? Colors.red : Colors.white, size: 32),
+              ),
+              Text('$likes', style: const TextStyle(color: Colors.white)),
+              const SizedBox(height: 12),
+              const Icon(Icons.comment, color: Colors.white, size: 28),
+              const Text('تعليق', style: TextStyle(color: Colors.white, fontSize: 11)),
+              const SizedBox(height: 12),
+              const Icon(Icons.share, color: Colors.white, size: 28),
+              const Text('مشاركة', style: TextStyle(color: Colors.white, fontSize: 11)),
+            ],
+          ),
+        ),
+        Positioned(
+          left: 12,
+          right: 75,
+          bottom: 20,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(user, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+              const SizedBox(height: 6),
+              Text(desc, style: const TextStyle(color: Colors.white)),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 }
-class LoginScreen extends StatelessWidget { const LoginScreen({super.key});
-  @override Widget build(BuildContext context) { return Scaffold(backgroundColor: Colors.black, body: Padding(padding: const EdgeInsets.all(24), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-    const Text('LUXY', style: TextStyle(fontSize: 52, fontWeight: FontWeight.bold, letterSpacing: 5)),
-    const SizedBox(height: 6), const Text('شاهد • انشر • استمتع', style: TextStyle(color: Colors.grey)),
-    const SizedBox(height: 35),
-    TextField(decoration: InputDecoration(hintText: 'الإيميل أو رقم الهاتف', prefixIcon: const Icon(Icons.person, color: Colors.grey), filled: true, fillColor: Colors.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none))), const SizedBox(height: 12),
-    TextField(obscureText: true, decoration: InputDecoration(hintText: 'كلمة السر', prefixIcon: const Icon(Icons.lock, color: Colors.grey), filled: true, fillColor: Colors.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none))),
-    const SizedBox(height: 8), Align(alignment: Alignment.centerLeft, child: TextButton(onPressed: () {}, child: const Text('نسيت كلمة السر؟', style: TextStyle(color: Colors.red)))),
-    const SizedBox(height: 10),
-    SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red, padding: const EdgeInsets.symmetric(vertical: 15), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MainNav())), child: const Text('دخول', style: TextStyle(color: Colors.white, fontSize: 18)))),
-    const SizedBox(height: 12),
-    SizedBox(width: double.infinity, child: OutlinedButton(style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MainNav())), child: const Text('دخول بحساب گوگل', style: TextStyle(color: Colors.white)))),
-    const SizedBox(height: 20),
-    Row(mainAxisAlignment: MainAxisAlignment.center, children: [const Text('ما عندك حساب؟ ', style: TextStyle(color: Colors.grey)), GestureDetector(onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterScreen())), child: const Text('انشاء حساب', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)))]),
-  ]))); }
+
+class DiscoverScreen extends StatelessWidget {
+  const DiscoverScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('اكتشاف')),
+      body: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 2, mainAxisSpacing: 2),
+        itemCount: 12,
+        itemBuilder: (context, i) {
+          return Container(
+            color: Colors.primaries[i % Colors.primaries.length],
+            child: Center(
+              child: Text('ريل ${i + 1}', style: const TextStyle(color: Colors.white)),
+            ),
+          );
+        },
+      ),
+    );
+  }
 }
-class RegisterScreen extends StatelessWidget { const RegisterScreen({super.key});
-  @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(backgroundColor: Colors.black, title: const Text('انشاء حساب')), backgroundColor: Colors.black, body: SingleChildScrollView(padding: const EdgeInsets.all(24), child: Column(children: [
-    const Text('انضم للوكسي', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)), const SizedBox(height: 6), const Text('انشئ حسابك وابدأ النشر', style: TextStyle(color: Colors.grey)), const SizedBox(height: 24),
-    _f('الاسم الكامل', Icons.person), const SizedBox(height: 12),
-    _f('اسم المستخدم @', Icons.alternate_email), const SizedBox(height: 12),
-    _f('الإيميل', Icons.email), const SizedBox(height: 12),
-    _f('رقم الهاتف', Icons.phone), const SizedBox(height: 12),
-    _f('كلمة السر', Icons.lock), const SizedBox(height: 12),
-    _f('تأكيد كلمة السر', Icons.lock), const SizedBox(height: 20),
-    SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red, padding: const EdgeInsets.symmetric(vertical: 15), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MainNav())), child: const Text('انشاء الحساب', style: TextStyle(color: Colors.white, fontSize: 18)))),
-  ]))); }
-  static Widget _f(String h, IconData i) => TextField(decoration: InputDecoration(hintText: h, prefixIcon: Icon(i, color: Colors.grey), filled: true, fillColor: Colors.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none)));
+
+class UploadScreen extends StatelessWidget {
+  const UploadScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('رفع فيديو')),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 200,
+              decoration: BoxDecoration(color: Colors.grey[900], borderRadius: BorderRadius.circular(16)),
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.video_library, size: 60, color: Colors.grey),
+                  SizedBox(height: 10),
+                  Text('اختر فيديو او سجل جديد', style: TextStyle(color: Colors.grey)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const TextField(decoration: InputDecoration(hintText: 'اكتب وصف الفيديو', border: OutlineInputBorder())),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                onPressed: () {},
+                child: const Text('نشر', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
-class MainNav extends StatefulWidget { const MainNav({super.key}); @override State<MainNav> createState() => _MainNavState(); }
-class _MainNavState extends State<MainNav> { int idx = 0; final pages = [const ReelsScreen(), const DiscoverScreen(), const UploadScreen(), const InboxScreen(), const ProfileScreen()];
-  @override Widget build(BuildContext context) { return Scaffold(body: pages[idx], bottomNavigationBar: BottomNavigationBar(currentIndex: idx, backgroundColor: Colors.black, selectedItemColor: Colors.red, unselectedItemColor: Colors.grey, type: BottomNavigationBarType.fixed, onTap: (i) => setState(() => idx = i), items: const [BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'), BottomNavigationBarItem(icon: Icon(Icons.search), label: 'اكتشاف'), BottomNavigationBarItem(icon: Icon(Icons.add_box, size: 32), label: 'رفع'), BottomNavigationBarItem(icon: Icon(Icons.inbox), label: 'الرسائل'), BottomNavigationBarItem(icon:cat > lib/main.dart << 'EOF'
-import 'package:flutter/material.dart';
-void main() { runApp(const LuxyApp()); }
-class LuxyApp extends StatelessWidget {
-  const LuxyApp({super.key});
-  @override Widget build(BuildContext context) { return MaterialApp(debugShowCheckedModeBanner: false, theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: Colors.black), home: const LoginScreen()); }
+
+class InboxScreen extends StatelessWidget {
+  const InboxScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('الرسائل')),
+      body: ListView(
+        children: const [
+          ListTile(leading: CircleAvatar(child: Text('س')), title: Text('سارة'), subtitle: Text('هلو شلونك؟')),
+          ListTile(leading: CircleAvatar(child: Text('ع')), title: Text('علي'), subtitle: Text('شفت الفيديو الجديد؟')),
+          ListTile(leading: CircleAvatar(child: Text('ل')), title: Text('لوكسي'), subtitle: Text('اهلا بيك بلوكسي')),
+        ],
+      ),
+    );
+  }
 }
-class LoginScreen extends StatelessWidget { const LoginScreen({super.key});
-  @override Widget build(BuildContext context) { return Scaffold(backgroundColor: Colors.black, body: Padding(padding: const EdgeInsets.all(24), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-    const Text('LUXY', style: TextStyle(fontSize: 52, fontWeight: FontWeight.bold, letterSpacing: 5)),
-    const SizedBox(height: 6), const Text('شاهد • انشر • استمتع', style: TextStyle(color: Colors.grey)),
-    const SizedBox(height: 35),
-    TextField(decoration: InputDecoration(hintText: 'الإيميل أو رقم الهاتف', prefixIcon: const Icon(Icons.person, color: Colors.grey), filled: true, fillColor: Colors.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none))), const SizedBox(height: 12),
-    TextField(obscureText: true, decoration: InputDecoration(hintText: 'كلمة السر', prefixIcon: const Icon(Icons.lock, color: Colors.grey), filled: true, fillColor: Colors.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none))),
-    const SizedBox(height: 8), Align(alignment: Alignment.centerLeft, child: TextButton(onPressed: () {}, child: const Text('نسيت كلمة السر؟', style: TextStyle(color: Colors.red)))),
-    const SizedBox(height: 10),
-    SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red, padding: const EdgeInsets.symmetric(vertical: 15), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MainNav())), child: const Text('دخول', style: TextStyle(color: Colors.white, fontSize: 18)))),
-    const SizedBox(height: 12),
-    SizedBox(width: double.infinity, child: OutlinedButton(style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MainNav())), child: const Text('دخول بحساب گوگل', style: TextStyle(color: Colors.white)))),
-    const SizedBox(height: 20),
-    Row(mainAxisAlignment: MainAxisAlignment.center, children: [const Text('ما عندك حساب؟ ', style: TextStyle(color: Colors.grey)), GestureDetector(onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterScreen())), child: const Text('انشاء حساب', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)))]),
-  ]))); }
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('@baro'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
+            },
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          const SizedBox(height: 16),
+          const CircleAvatar(radius: 45, child: Text('B', style: TextStyle(fontSize: 35))),
+          const SizedBox(height: 10),
+          const Text('بارو', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          const Text('@baro', style: TextStyle(color: Colors.grey)),
+          const SizedBox(height: 16),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(children: [Text('12', style: TextStyle(fontWeight: FontWeight.bold)), Text('متابعة')]),
+              Column(children: [Text('1.2K', style: TextStyle(fontWeight: FontWeight.bold)), Text('متابع')]),
+              Column(children: [Text('5.4K', style: TextStyle(fontWeight: FontWeight.bold)), Text('اعجاب')]),
+            ],
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            onPressed: () {},
+            child: const Text('تعديل الملف', style: TextStyle(color: Colors.white)),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 2, mainAxisSpacing: 2),
+              itemCount: 6,
+              itemBuilder: (context, i) {
+                return Container(
+                  color: Colors.primaries[i % Colors.primaries.length],
+                  child: Center(
+                    child: Text('فيديو ${i + 1}', style: const TextStyle(color: Colors.white)),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
-class RegisterScreen extends StatelessWidget { const RegisterScreen({super.key});
-  @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(backgroundColor: Colors.black, title: const Text('انشاء حساب')), backgroundColor: Colors.black, body: SingleChildScrollView(padding: const EdgeInsets.all(24), child: Column(children: [
-    const Text('انضم للوكسي', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)), const SizedBox(height: 6), const Text('انشئ حسابك وابدأ النشر', style: TextStyle(color: Colors.grey)), const SizedBox(height: 24),
-    _f('الاسم الكامل', Icons.person), const SizedBox(height: 12),
-    _f('اسم المستخدم @', Icons.alternate_email), const SizedBox(height: 12),
-    _f('الإيميل', Icons.email), const SizedBox(height: 12),
-    _f('رقم الهاتف', Icons.phone), const SizedBox(height: 12),
-    _f('كلمة السر', Icons.lock), const SizedBox(height: 12),
-    _f('تأكيد كلمة السر', Icons.lock), const SizedBox(height: 20),
-    SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red, padding: const EdgeInsets.symmetric(vertical: 15), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MainNav())), child: const Text('انشاء الحساب', style: TextStyle(color: Colors.white, fontSize: 18)))),
-  ]))); }
-  static Widget _f(String h, IconData i) => TextField(decoration: InputDecoration(hintText: h, prefixIcon: Icon(i, color: Colors.grey), filled: true, fillColor: Colors.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none)));
+
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
 }
-class MainNav extends StatefulWidget { const MainNav({super.key}); @override State<MainNav> createState() => _MainNavState(); }
-class _MainNavState extends State<MainNav> { int idx = 0; final pages = [const ReelsScreen(), const DiscoverScreen(), const UploadScreen(), const InboxScreen(), const ProfileScreen()];
-  @override Widget build(BuildContext context) { return Scaffold(body: pages[idx], bottomNavigationBar: BottomNavigationBar(currentIndex: idx, backgroundColor: Colors.black, selectedItemColor: Colors.red, unselectedItemColor: Colors.grey, type: BottomNavigationBarType.fixed, onTap: (i) => setState(() => idx = i), items: const [BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'), BottomNavigationBarItem(icon: Icon(Icons.search), label: 'اكتشاف'), BottomNavigationBarItem(icon: Icon(Icons.add_box, size: 32), label: 'رفع'), BottomNavigationBarItem(icon: Icon(Icons.inbox), label: 'الرسائل'), BottomNavigationBarItem(icon: Icon(Icons.person), label: 'حسابي')])); } }
-class Reel { final String name; final String user; final String desc; final Color color; bool liked; int likes; final List<String> comments; bool followed; Reel({required this.name, required this.user, required this.desc, required this.color, this.liked = false, required this.likes, required this.comments, this.followed = false}); }
-class ReelsScreen extends StatefulWidget { const ReelsScreen({super.key}); @override State<ReelsScreen> createState() => _ReelsScreenState(); }
-class _ReelsScreenState extends State<ReelsScreen> {
-  final reels = [Reel(name: 'بارو', user: '@baro', desc: 'أول فيديو بلوكسي 🔥 #لوكسي #عراق', color: Colors.deepPurple, likes: 1240, comments: ['عاشت ايدك', 'وين هالمكان؟']), Reel(name: 'سارة', user: '@sara', desc: 'يومياتي ❤️', color: Colors.teal, likes: 890, comments: ['حلوو']), Reel(name: 'علي', user: '@ali', desc: 'تحدي جديد 💪', color: Colors.orange, likes: 2100, comments: ['قوي'])];
-  void showComments(Reel r) { final c = TextEditingController(); showModalBottomSheet(context: context, backgroundColor: Colors.grey[900], shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))), builder: (_) => StatefulBuilder(builder: (ctx, ss) => Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom), child: Column(children: [const Padding(padding: EdgeInsets.all(12), child: Text('التعليقات', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17))), Expanded(child: ListView.builder(itemCount: r.comments.length, itemBuilder: (_, i) => ListTile(leading: const CircleAvatar(child: Icon(Icons.person, size: 18)), title: Text(r.comments[i])))), Padding(padding: const EdgeInsets.all(8), child: Row(children: [Expanded(child: TextField(controller: c, decoration: InputDecoration(hintText: 'اكتب تعليق...', filled: true, fillColor: Colors.black, border: OutlineInputBorder(borderRadius: BorderRadius.circular(25))))), IconButton(icon: const Icon(Icons.send, color: Colors.red), onPressed: () { if (c.text.isNotEmpty) { ss(() => r.comments.add(c.text)); setState(() {}); c.clear(); } })]))])))); }
-  @override Widget build(BuildContext context) { return Scaffold(body: PageView.builder(scrollDirection: Axis.vertical, itemCount: reels.length, itemBuilder: (_, i) { final r = reels[i]; return Stack(children: [
-    Container(color: r.color, child: const Center(child: Icon(Icons.play_circle_fill, size: 85, color: Colors.white60))),
-    Positioned(top: 45, left: 0, right: 0, child: Row(mainAxisAlignment: MainAxisAlignment.center, children: const [Text('متابعة  |  ', style: TextStyle(color: Colors.grey)), Text('لك', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16))])),
-    Positioned(right: 10, bottom: 90, child: Column(children: [CircleAvatar(radius: 27, backgroundColor: Colors.white, child: Text(r.name[0], style: const TextStyle(fontSize: 26, color: Colors.black))), const SizedBox(height: 18), IconButton(onPressed: () => setState(() { r.liked = !r.liked; r.likes += r.liked ? 1 : -1; }), icon: Icon(r.liked ? Icons.favorite : Icons.favorite_border, color: r.liked ? Colors.red : Colors.white, size: 33)), Text('${r.likes}', style: const TextStyle(color: Colors.white)), const SizedBox(height: 10), IconButton(onPressed: () => showComments(r), icon: const Icon(Icons.comment, color: Colors.white, size: 30)), Text('${r.comments.length}', style: const TextStyle(color: Colors.white)), const SizedBox(height: 12), const Icon(Icons.share, color: Colors.white, size: 28), const Text('مشاركة', style: TextStyle(color: Colors.white, fontSize: 11)), const SizedBox(height: 12), const Icon(Icons.bookmark_border, color: Colors.white, size: 28), const Text('حفظ', style: TextStyle(color: Colors.white, fontSize: 11))])),
-    Positioned(left: 12, right: 75, bottom: 20, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(r.user, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)), const SizedBox(height: 6), Text(r.desc, style: const TextStyle(color: Colors.white)), const SizedBox(height: 8), Row(children: const [Icon(Icons.music_note, size: 14, color: Colors.white), SizedBox(width: 4), Text('الصوت الأصلي - بارو', style: TextStyle(color: Colors.white, fontSize: 12))])])),
-  ]); })); }
-}
-class DiscoverScreen extends StatelessWidget { const DiscoverScreen({super.key}); @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(backgroundColor: Colors.black, title: TextField(decoration: InputDecoration(hintText: 'ابحث في لوكسي...', prefixIcon: const Icon(Icons.search, color: Colors.grey), filled: true, fillColor: Colors.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none)))), backgroundColor: Colors.black, body: Column(children: [SingleChildScrollView(scrollDirection: Axis.horizontal, padding: const EdgeInsets.all(8), child: Row(children: ['الكل', 'ترند', 'رياضة', 'ضحك', 'أغاني', 'طبخ', 'أخبار'].map((t) => Padding(padding: const EdgeInsets.only(right: 8), child: Chip(label: Text(t), backgroundColor: Colors.grey[900]))).toList())), Expanded(child: GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 2, mainAxisSpacing: 2), itemCount: 18, itemBuilder: (_, i) => Container(color: Colors.primaries[i % Colors.primaries.length], child: Stack(children: [Center(child: Text('ريل ${i + 1}', style: const TextStyle(color: Colors.white))), const Positioned(bottom: 4, left: 4, child: Row(children: [Icon(Icons.play_arrow, size: 14, color: Colors.white), Text('1.2K', style: TextStyle(color: Colors.white, fontSize: 11))]))])))) ])); } }
-class UploadScreen extends StatelessWidget { const UploadScreen({super.key}); @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(backgroundColor: Colors.black, title: const Text('رفع فيديو')), backgroundColor: Colors.black, body: Padding(padding: const EdgeInsets.all(20), child: Column(children: [Container(width: double.infinity, height: 220, decoration: BoxDecoration(color: Colors.grey[900], borderRadius:cat >> lib/main.dart << 'EOF'
-class DiscoverScreen extends StatelessWidget { const DiscoverScreen({super.key}); @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, title: TextField(decoration: InputDecoration(hintText: 'ابحث في لوكسي...', prefixIcon: const Icon(Icons.search, color: 【entity-Colors¦canonical_name=Colors】.grey), filled: true, fillColor: 【entity-Colors¦canonical_name=Colors】.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none)))), backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, body: Column(children: [SingleChildScrollView(scrollDirection: Axis.horizontal, padding: const EdgeInsets.all(8), child: Row(children: ['الكل', 'ترند', 'رياضة', 'ضحك', 'أغاني', 'طبخ', 'أخبار'].map((t) => Padding(padding: const EdgeInsets.only(right: 8), child: Chip(label: Text(t), backgroundColor: 【entity-Colors¦canonical_name=Colors】.grey[900]))).toList())), Expanded(child: GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 2, mainAxisSpacing: 2), itemCount: 18, itemBuilder: (_, i) => Container(color: 【entity-Colors¦canonical_name=Colors】.primaries[i % 【entity-Colors¦canonical_name=Colors】.primaries.length], child: Stack(children: [Center(child: Text('ريل ${i + 1}', style: const TextStyle(color: 【entity-Colors¦canonical_name=Colors】.white))), const Positioned(bottom: 4, left: 4, child: Row(children: [Icon(Icons.play_arrow, size: 14, color: 【entity-Colors¦canonical_name=Colors】.white), Text('1.2K', style: TextStyle(color: 【entity-Colors¦canonical_name=Colors】.white, fontSize: 11))]))])))) ])); } }
-class UploadScreen extends StatelessWidget { const UploadScreen({super.key}); @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, title: const Text('رفع فيديو')), backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, body: Padding(padding: const EdgeInsets.all(20), child: Column(children: [Container(width: double.infinity, height: 220, decoration: BoxDecoration(color: 【entity-Colors¦canonical_name=Colors】.grey[900], borderRadius: BorderRadius.circular(16)), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: const [Icon(Icons.video_library, size: 60, color: 【entity-Colors¦canonical_name=Colors】.grey), SizedBox(height: 10), Text('اختر فيديو أو سجل جديد', style: TextStyle(color: 【entity-Colors¦canonical_name=Colors】.grey))])), const SizedBox(height: 16), Row(children: [Expanded(child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: 【entity-Colors¦canonical_name=Colors】.red), onPressed: () {}, child: const Text('من الاستوديو', style: TextStyle(color: 【entity-Colors¦canonical_name=Colors】.white)))), const SizedBox(width: 10), Expanded(child: OutlinedButton(onPressed: () {}, child: const Text('تسجيل', style: TextStyle(color: 【entity-Colors¦canonical_name=Colors】.white))))]), const SizedBox(height: 16), TextField(decoration: InputDecoration(hintText: 'اكتب وصف الفيديو... #لوكسي', filled: true, fillColor: 【entity-Colors¦canonical_name=Colors】.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none))), const SizedBox(height: 12), TextField(decoration: InputDecoration(hintText: 'أضف هاشتاغات...', filled: true, fillColor: 【entity-Colors¦canonical_name=Colors】.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none))), const SizedBox(height: 20), SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: 【entity-Colors¦canonical_name=Colors】.red, padding: const EdgeInsets.symmetric(vertical: 15)), onPressed: () {}, child: const Text('نشر', style: TextStyle(color: 【entity-Colors¦canonical_name=Colors】.white, fontSize: 18))))]))); } }
-class InboxScreen extends StatelessWidget { const InboxScreen({super.key}); @override Widget build(BuildContext context) { final chats = [{'n': 'سارة', 'm': 'هلو شلونك؟', 't': '2د'}, {'n': 'علي', 'm': 'شفت الفيديو الجديد؟', 't': '1س'}, {'n': 'لوكسي', 'm': 'أهلاً بيك بلوكسي', 't': 'أمس'}]; return Scaffold(appBar: AppBar(backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, title: const Text('الرسائل'), actions: const [Icon(Icons.notifications)]), backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, body: ListView.builder(itemCount: chats.length, itemBuilder: (_, i) => ListTile(leading: CircleAvatar(child: Text(chats[i]['n']![0])), title: Text(chats[i]['n']!), subtitle: Text(chats[i]['m']!), trailing: Text(chats[i]['t']!, style: const TextStyle(color: 【entity-Colors¦canonical_name=Colors】.grey)), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ChatScreen(name: chats[i]['n']!)))))); } }
-class ChatScreen extends StatelessWidget { final String name; const ChatScreen({super.key, required this.name}); @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, title: Text(name)), backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, body: Column(children: [Expanded(child: ListView(children: const [Align(alignment: Alignment.centerLeft, child: Chip(label: Text('هلو شلونك؟'))), Align(alignment: Alignment.centerRight, child: Chip(label: Text('تمام الحمدلله وانت؟'), backgroundColor: 【entity-Colors¦canonical_name=Colors】.red))])), Padding(padding: const EdgeInsets.all(8), child: Row(children: [Expanded(child: TextField(decoration: InputDecoration(hintText: 'اكتب رسالة...', filled: true, fillColor: 【entity-Colors¦canonical_name=Colors】.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(25))))), IconButton(icon: const Icon(Icons.send, color: 【entity-Colors¦canonical_name=Colors】.red), onPressed: () {})]))])); } }
-class ProfileScreen extends StatefulWidget { const ProfileScreen({super.key}); @override State<ProfileScreen> createState() => _ProfileScreenState(); }
-class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProviderStateMixin { late TabController tab; @override void initState() { super.initState(); tab = TabController(length: 3, vsync: this); }
-  @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, title: const Text('@baro'), actions: [IconButton(icon: const Icon(Icons.settings), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen())))]), backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, body: Column(children: [const SizedBox(height: 12), const CircleAvatar(radius: 45, child: Text('B', style: TextStyle(fontSize: 35))), const SizedBox(height: 8), const Text('بارو', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)), const Text('@baro • العراق - بغداد', style: TextStyle(color: 【entity-Colors¦canonical_name=Colors】.grey)), const SizedBox(height: 8), const Text('صانع محتوى | لوكسي', style: TextStyle(color: 【entity-Colors¦canonical_name=Colors】.white)), const SizedBox(height: 12), Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: const [Column(children: [Text('12', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)), Text('متابعة')]), Column(children: [Text('1.2K', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)), Text('متابع')]), Column(children: [Text('5.4K', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)), Text('اعجاب')])]), const SizedBox(height: 12), Row(mainAxisAlignment: MainAxisAlignment.center, children: [ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: 【entity-Colors¦canonical_name=Colors】.red), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfileScreen())), child: const Text('تعديل الملف', style: TextStyle(color: 【entity-Colors¦canonical_name=Colors】.white))), const SizedBox(width: 8), OutlinedButton(onPressed: () {}, child: const Text('مشاركة الملف', style: TextStyle(color: 【entity-Colors¦canonical_name=Colors】.white)))]), const SizedBox(height: 12), TabBar(controller: tab, indicatorColor: 【entity-Colors¦canonical_name=Colors】.red, tabs: const [Tab(icon: Icon(Icons.grid_on), text: 'فيديوهاتي'), Tab(icon: Icon(Icons.bookmark), text: 'المحفوظ'), Tab(icon: Icon(Icons.favorite), text: 'اعجبني')]), Expanded(child: TabBarView(controller: tab, children: [GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 2, mainAxisSpacing: 2), itemCount: 9, itemBuilder: (_, i) => Container(color: 【entity-Colors¦canonical_name=Colors】.primaries[i % 【entity-Colors¦canonical_name=Colors】.primaries.length], child: Center(child: Text('فيديو ${i + 1}', style: const TextStyle(color: 【entity-Colors¦canonical_name=Colors】.white))))), const Center(child: Text('لا يوجد محفوظات بعد')), const Center(child: Text('لا يوجد اعجابات بعد'))]))])); } }
-class EditProfileScreen extends StatelessWidget { const EditProfileScreen({super.key}); @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, title: const Text('تعديل الملف')), backgroundColor: 【entity-Colors¦canonical_name=Colors】.black, body: Padding(padding: const EdgeInsets.all(20), child: Column(children: [const CircleAvatar(radius: 45, child: Icon(Icons.camera_alt)), const SizedBox(height: 8), const Text('تغيير الصورة', style: TextStyle(color: Colors.red)), const SizedBox(height: 20), _f('الاسم', 'بارو'), const SizedBox(height: 12), _f('اسم المستخدم', '@baro'), const SizedBox(height: 12), _f('النبذة', 'صانع محتوى | لوكسي'), const SizedBox(height: 20), SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red, padding: const EdgeInsets.symmetric(vertical: 14)), onPressed: () => Navigator.pop(context), child: const Text('حفظ', style: TextStyle(color: Colors.white))))]))); } static Widget _f(String l, String h) => TextField(decoration: InputDecoration(labelText: l, hintText: h, filled: true, fillColor: Colors.grey[900], border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none))); }
-class SettingsScreen extends StatefulWidget { const SettingsScreen({super.key}); @override State<SettingsScreen> createState() => _SettingsScreenState(); }
-class _SettingsScreenState extends State<SettingsScreen> { bool notif = true; bool dark = true; bool privateAcc = false; String lang = 'العربية';
-  @override Widget build(BuildContext context) { return Scaffold(appBar: AppBar(backgroundColor: Colors.black, title: const Text('الاعدادات')), backgroundColor: Colors.black, body: ListView(children: [
-    const Padding(padding: EdgeInsets.all(16), child: Text('الحساب', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold))),
-    _tile(Icons.person, 'إدارة الحساب', 'الاسم، الإيميل، رقم الهاتف'), _tile(Icons.lock, 'الخصوصية والأمان', 'كلمة السر، التحقق بخطوتين'), _tile(Icons.block, 'الحسابات المحظورة', '3 حسابات'),
-    const Padding(padding: EdgeInsets.all(16), child: Text('التطبيق', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold))),
-    SwitchListTile(title: const Text('التنبيهات'), subtitle: const Text('تنبيهات اللايك والتعليق والمتابعة'), value: notif, activeColor: Colors.red, onChanged: (v) => setState(() => notif = v)),
-    SwitchListTile(title: const Text('الوضع الليلي'), subtitle: const Text('الوضع الأسود'), value: dark, activeColor: Colors.red, onChanged: (v) => setState(() => dark = v)),
-    SwitchListTile(title: const Text('حساب خاص'), subtitle: const Text('فقط المتابعين يشوفون فيديوهاتك'), value: privateAcc, activeColor: Colors.red, onChanged: (v) => setState(() => privateAcc = v)),
-    ListTile(leading: const Icon(Icons.language), title: const Text('اللغة'), subtitle: Text(lang), trailing: const Icon(Icons.arrow_forward_ios, size: 16), onTap: () => showDialog(context: context, builder: (_) => AlertDialog(title: const Text('اختر اللغة'), content: Column(mainAxisSize: MainAxisSize.min, children: [ListTile(title: const Text('العربية'), onTap: () { setState(() => lang = 'العربية'); Navigator.pop(context); }), ListTile(title: const Text('English'), onTap: () { setState(() => lang = 'English'); Navigator.pop(context); })])))),
-    _tile(Icons.storage, 'التخزين والبيانات', 'مسح ذاكرة التخزين المؤقت'),
-    _tile(Icons.help, 'المساعدة والدعم', 'تواصل معنا، الأسئلة الشائعة'),
-    _tile(Icons.info, 'حول لوكسي', 'النسخة 1.0.0'),
-    const SizedBox(height: 20),
-    Padding(padding: const EdgeInsets.symmetric(horizontal: 20), child: SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red, padding: const EdgeInsets.symmetric(vertical: 14)), onPressed: () => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => const LoginScreen()), (_) => false), child: const Text('تسجيل الخروج', style: TextStyle(color: Colors.white))))),
-    const SizedBox(height: 12),
-    Padding(padding: const EdgeInsets.symmetric(horizontal: 20), child: OutlinedButton(style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)), onPressed: () {}, child: const Text('حذف الحساب', style: TextStyle(color: Colors.red)))),
-  ])); }
-  Widget _tile(IconData i, String t, String s) => ListTile(leading: Icon(i), title: Text(t), subtitle: Text(s), trailing: const Icon(Icons.arrow_forward_ios, size: 16), onTap: () {});
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  bool notif = true;
+  bool dark = true;
+  String lang = 'العربية';
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('الاعدادات')),
+      body: ListView(
+        children: [
+          const ListTile(leading: Icon(Icons.person), title: Text('ادارة الحساب'), subtitle: Text('الاسم، الايميل، رقم الهاتف')),
+          const ListTile(leading: Icon(Icons.lock), title: Text('الخصوصية والامان'), subtitle: Text('كلمة السر، التحقق بخطوتين')),
+          SwitchListTile(
+            title: const Text('التنبيهات'),
+            subtitle: const Text('تنبيهات اللايك والتعليق'),
+            value: notif,
+            activeColor: Colors.red,
+            onChanged: (v) {
+              setState(() {
+                notif = v;
+              });
+            },
+          ),
+          SwitchListTile(
+            title: const Text('الوضع الليلي'),
+            value: dark,
+            activeColor: Colors.red,
+            onChanged: (v) {
+              setState(() {
+                dark = v;
+              });
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text('اللغة'),
+            subtitle: Text(lang),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('اختر اللغة'),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          title: const Text('العربية'),
+                          onTap: () {
+                            setState(() {
+                              lang = 'العربية';
+                            });
+                            Navigator.pop(context);
+                          },
+                        ),
+                        ListTile(
+                          title: const Text('English'),
+                          onTap: () {
+                            setState(() {
+                              lang = 'English';
+                            });
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+          const ListTile(leading: Icon(Icons.info), title: Text('حول لوكسي'), subtitle: Text('النسخة 1.0.0')),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false);
+                },
+                child: const Text('تسجيل الخروج', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
