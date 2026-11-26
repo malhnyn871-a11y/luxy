@@ -489,10 +489,28 @@ void showCommentsSheet(BuildContext context) {
 
 
 
+
 class LuxyProfileTabs extends StatefulWidget {
   const LuxyProfileTabs({super.key});
   @override State<LuxyProfileTabs> createState() => _LuxyProfileTabsState();
 }
+class _LuxyProfileTabsState extends State<LuxyProfileTabs> {
+  int selected = 0;
+  final List<Map<String, dynamic>> tabs = [
+    {'icon': Icons.grid_on, 'label': 'فيديوهات'},
+    {'icon': Icons.favorite, 'label': 'لايكات'},
+    {'icon': Icons.bookmark, 'label': 'محفوظات'},
+    {'icon': Icons.lock, 'label': 'خاص'},
+    {'icon': Icons.repeat, 'label': 'إعادة'},
+  ];
+  @override Widget build(BuildContext context) {
+    return Container(color: Colors.black, padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8), child: Row(children: List.generate(tabs.length, (i) {
+      bool active = selected == i;
+      return Expanded(child: GestureDetector(onTap: () { setState(() { selected = i; }); }, child: Container(margin: const EdgeInsets.symmetric(horizontal: 2), padding: const EdgeInsets.symmetric(vertical: 10), decoration: BoxDecoration(color: active ? const Color(0xFFE11D2E) : const Color(0xFF1A1A1A), borderRadius: BorderRadius.circular(20), border: Border.all(color: active ? const Color(0xFFE11D2E) : Colors.white24, width: 0.5)), child: Column(mainAxisSize: MainAxisSize.min, children: [Icon(tabs[i]['icon'], color: Colors.white, size: 18), const SizedBox(height: 3), Text(tabs[i]['label'], style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11))]))));
+    })));
+  }
+}
+
 class _LuxyProfileTabsState extends State<LuxyProfileTabs> {
   int selected = 0;
   final List<Map<String, dynamic>> tabs = [
