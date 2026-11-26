@@ -196,10 +196,12 @@ class _ReelsScreenState extends State<ReelsScreen> {
               ),
               Text('$likes', style: const TextStyle(color: Colors.white)),
               const SizedBox(height: 12),
-              Container(decoration: const BoxDecoration(color: Colors.black45, shape: BoxShape.circle), child: IconButton(onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('التعليقات'))); }, icon: const Icon(Icons.comment, color: Colors.white, size: 28))),
+              IconButton(onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('التعليقات'))); }, icon: const Icon(Icons.comment, color: Colors.white, size: 32)),
               const Text('تعليق', style: TextStyle(color: Colors.white, fontSize: 11)),
               const SizedBox(height: 12),
-              Container(decoration: const BoxDecoration(color: Colors.black45, shape: BoxShape.circle), child: IconButton(onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('مشاركة'))); }, icon: const Icon(Icons.share, color: Colors.white, size: 28))),
+              const SizedBox(height: 12),
+              const SaveButton(),
+              IconButton(onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('مشاركة'))); }, icon: const Icon(Icons.share, color: Colors.white, size: 32)),
               const Text('مشاركة', style: TextStyle(color: Colors.white, fontSize: 11)),
             ],
           ),
@@ -456,5 +458,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       ),
     );
+  }
+}
+
+
+class SaveButton extends StatefulWidget {
+  const SaveButton({super.key});
+  @override State<SaveButton> createState() => _SaveButtonState();
+}
+class _SaveButtonState extends State<SaveButton> {
+  bool saved = false;
+  int count = 35;
+  @override Widget build(BuildContext context) {
+    return Column(children: [IconButton(onPressed: () { setState(() { saved = !saved; count += saved ? 1 : -1; }); }, icon: Icon(saved ? Icons.bookmark : Icons.bookmark_border, color: saved ? Colors.yellow : Colors.white, size: 32)), Text('$count', style: const TextStyle(color: Colors.white)), const Text('حفظ', style: TextStyle(color: Colors.white, fontSize: 11))]);
   }
 }
