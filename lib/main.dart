@@ -343,7 +343,8 @@ class ProfileScreen extends StatelessWidget {
             child: const Text('تعديل الملف', style: TextStyle(color: Colors.white)),
           ),
           const SizedBox(height: 16),
-          Expanded(
+          const LuxyProfileTabs(),
+            Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 2, mainAxisSpacing: 2),
               itemCount: 6,
