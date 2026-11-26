@@ -338,7 +338,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
             onPressed: () {},
             child: const Text('تعديل الملف', style: TextStyle(color: Colors.white)),
           ),
@@ -490,6 +490,8 @@ void showCommentsSheet(BuildContext context) {
 
 
 
+
+
 class LuxyProfileTabs extends StatefulWidget {
   const LuxyProfileTabs({super.key});
   @override State<LuxyProfileTabs> createState() => _LuxyProfileTabsState();
@@ -504,10 +506,9 @@ class _LuxyProfileTabsState extends State<LuxyProfileTabs> {
     {'icon': Icons.repeat, 'label': 'إعادة'},
   ];
   @override Widget build(BuildContext context) {
-    return Container(color: Colors.black, padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8), child: Row(children: List.generate(tabs.length, (i) {
+    return Container(margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 10), padding: const EdgeInsets.all(4), decoration: BoxDecoration(color: const Color(0xFF111111), borderRadius: BorderRadius.circular(30), border: Border.all(color: Colors.white12, width: 0.5)), child: Row(children: List.generate(tabs.length, (i) {
       bool active = selected == i;
-      return Expanded(child: GestureDetector(onTap: () { setState(() { selected = i; }); }, child: Container(margin: const EdgeInsets.symmetric(horizontal: 2), padding: const EdgeInsets.symmetric(vertical: 10), decoration: BoxDecoration(color: active ? const Color(0xFFE11D2E) : const Color(0xFF1A1A1A), borderRadius: BorderRadius.circular(20), border: Border.all(color: active ? const Color(0xFFE11D2E) : Colors.white24, width: 0.5)), child: Column(mainAxisSize: MainAxisSize.min, children: [Icon(tabs[i]['icon'], color: Colors.white, size: 18), const SizedBox(height: 3), Text(tabs[i]['label'], style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11))]))));
+      return Expanded(child: GestureDetector(onTap: () { setState(() { selected = i; }); }, child: Container(padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 2), decoration: BoxDecoration(color: active ? Colors.white : Colors.transparent, borderRadius: BorderRadius.circular(26)), child: Column(mainAxisSize: MainAxisSize.min, children: [Row(mainAxisSize: MainAxisSize.min, children: [Icon(tabs[i]['icon'], color: active ? Colors.black : Colors.white, size: 16), const SizedBox(width: 3), Text(tabs[i]['label'], style: TextStyle(color: active ? Colors.black : Colors.white, fontWeight: FontWeight.bold, fontSize: 11))]), if (active) Container(margin: const EdgeInsets.only(top: 4), width: 5, height: 5, decoration: const BoxDecoration(color: Color(0xFFE11D2E), shape: BoxShape.circle))]))));
     })));
   }
 }
-
