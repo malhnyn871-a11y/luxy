@@ -196,7 +196,7 @@ class _ReelsScreenState extends State<ReelsScreen> {
               ),
               Text('$likes', style: const TextStyle(color: Colors.white)),
               const SizedBox(height: 12),
-              IconButton(onPressed: () { showCommentsSheet(context); }, icon: const Stack(alignment: Alignment.center, children: [const Icon(Icons.chat_bubble, color: Colors.white, size: 34), Row(mainAxisSize: MainAxisSize.min, children: [Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle)), const SizedBox(width: 2), Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle)), const SizedBox(width: 2), Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle))])])),
+              IconButton(onPressed: () { showCommentsSheet(context); }, icon: Stack(alignment: Alignment.center, children: [const Icon(Icons.chat_bubble, color: Colors.white, size: 34), Row(mainAxisSize: MainAxisSize.min, children: [Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle)), const SizedBox(width: 2), Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle)), const SizedBox(width: 2), Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle))])])),
               const Text('تعليق', style: TextStyle(color: Colors.white, fontSize: 11)),
               const SizedBox(height: 12),
               const SizedBox(height: 12),
