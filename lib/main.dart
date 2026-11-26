@@ -323,7 +323,7 @@ class ProfileScreen extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(height: 16),
-          const CircleAvatar(radius: 45, child: Text('B', style: TextStyle(fontSize: 35))),
+          Container(padding: const EdgeInsets.all(3), decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xFFE11D2E), width: 2.5)), child: const CircleAvatar(radius: 42, backgroundColor: Colors.white, child: Text('B', style: TextStyle(fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold)))),
           const SizedBox(height: 10),
           const Text('بارو', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           const Text('@baro', style: TextStyle(color: Colors.grey)),
@@ -340,7 +340,7 @@ class ProfileScreen extends StatelessWidget {
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
             onPressed: () {},
-            child: const Text('تعديل الملف', style: TextStyle(color: Colors.white)),
+            child: const Text('تعديل الملف', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
           ),
           const SizedBox(height: 16),
           const LuxyProfileTabs(),
@@ -352,7 +352,7 @@ class ProfileScreen extends StatelessWidget {
                 return Container(
                   color: Colors.primaries[i % Colors.primaries.length],
                   child: Center(
-                    child: Text('فيديو ${i + 1}', style: const TextStyle(color: Colors.white)),
+                    child: Text('فيديو ${i + 1}', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
                   ),
                 );
               },
