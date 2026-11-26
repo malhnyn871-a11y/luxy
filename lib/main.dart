@@ -192,16 +192,16 @@ class _ReelsScreenState extends State<ReelsScreen> {
               const SizedBox(height: 18),
               IconButton(
                 onPressed: onLike,
-                icon: Icon(liked ? Icons.favorite : Icons.favorite, color: liked ? Colors.red : Colors.white, size: 32),
+                icon: Icon(liked ? Icons.favorite : Icons.favorite, color: liked ? Colors.red : Colors.white, size: 36),
               ),
               Text('$likes', style: const TextStyle(color: Colors.white)),
               const SizedBox(height: 12),
-              IconButton(onPressed: () { showCommentsSheet(context); }, icon: Stack(alignment: Alignment.center, children: [const Icon(Icons.chat_bubble, color: Colors.white, size: 34), Row(mainAxisSize: MainAxisSize.min, children: [Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle)), const SizedBox(width: 2), Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle)), const SizedBox(width: 2), Container(width: 3, height: 3, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle))])])),
+              IconButton(onPressed: () { showCommentsSheet(context); }, icon: Stack(alignment: Alignment.center, children: [const Icon(Icons.chat_bubble, color: Colors.white, size: 38), Row(mainAxisSize: MainAxisSize.min, children: [Container(width: 4, height: 4, decoration: const BoxDecoration(color: Color(0xFF555555), shape: BoxShape.circle)), const SizedBox(width: 2), Container(width: 4, height: 4, decoration: const BoxDecoration(color: Color(0xFF555555), shape: BoxShape.circle)), const SizedBox(width: 2), Container(width: 4, height: 4, decoration: const BoxDecoration(color: Color(0xFF555555), shape: BoxShape.circle))])])),
               const Text('تعليق', style: TextStyle(color: Colors.white, fontSize: 11)),
               const SizedBox(height: 12),
               const SizedBox(height: 12),
               const SaveButton(),
-              IconButton(onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('مشاركة'))); }, icon: const Icon(Icons.share, color: Colors.white, size: 32)),
+              IconButton(onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('مشاركة'))); }, icon: const Icon(Icons.send, color: Colors.white, size: 36)),
               const Text('مشاركة', style: TextStyle(color: Colors.white, fontSize: 11)),
             ],
           ),
@@ -470,13 +470,19 @@ class _SaveButtonState extends State<SaveButton> {
   bool saved = false;
   int count = 35;
   @override Widget build(BuildContext context) {
-    return Column(children: [IconButton(onPressed: () { setState(() { saved = !saved; count += saved ? 1 : -1; }); }, icon: Icon(saved ? Icons.bookmark : Icons.bookmark, color: saved ? Colors.yellow : Colors.white, size: 32)), Text('$count', style: const TextStyle(color: Colors.white)), const Text('حفظ', style: TextStyle(color: Colors.white, fontSize: 11))]);
+    return Column(children: [IconButton(onPressed: () { setState(() { saved = !saved; count += saved ? 1 : -1; }); }, icon: Icon(saved ? Icons.bookmark : Icons.bookmark, color: saved ? Colors.yellow : Colors.white, size: 36)), Text('$count', style: const TextStyle(color: Colors.white)), const Text('حفظ', style: TextStyle(color: Colors.white, fontSize: 11))]);
   }
 }
 
 
+
 void showCommentsSheet(BuildContext context) {
-  showModalBottomSheet(context: context, backgroundColor: Colors.grey[900], shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))), builder: (ctx) {
-    return Padding(padding: const EdgeInsets.all(16), child: Column(mainAxisSize: MainAxisSize.min, children: [Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10))), const SizedBox(height: 12), const Text('التعليقات', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)), const SizedBox(height: 12), ListTile(leading: CircleAvatar(child: Text('س')), title: Text('سارة', style: TextStyle(color: Colors.white)), subtitle: Text('عاشت ايدك', style: TextStyle(color: Colors.white70))), const SizedBox(height: 8), TextField(style: TextStyle(color: Colors.white), decoration: InputDecoration(hintText: 'اكتب تعليق...', hintStyle: TextStyle(color: Colors.white54), border: OutlineInputBorder(borderRadius: BorderRadius.circular(25))))]));
+  List<Map<String, dynamic>> comments = [{'name': 'سارة', 'text': 'عاشت ايدك', 'time': 'قبل 10 دقائق', 'likes': 12, 'liked': false}];
+  TextEditingController ctrl = TextEditingController();
+  showModalBottomSheet(context: context, isScrollControlled: true, backgroundColor: Colors.grey[900], shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))), builder: (ctx) {
+    return StatefulBuilder(builder: (ctx2, setState) {
+      return Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(ctx2).viewInsets.bottom, left: 16, right: 16, top: 16), child: Column(mainAxisSize: MainAxisSize.min, children: [Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10))), const SizedBox(height: 12), const Text('التعليقات', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)), const SizedBox(height: 12), SizedBox(height: 250, child: ListView.builder(itemCount: comments.length, itemBuilder: (c, i) { return ListTile(leading: CircleAvatar(child: Text(comments[i]['name'][0])), title: Text(comments[i]['name'], style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(comments[i]['text'], style: const TextStyle(color: Colors.white)), const SizedBox(height: 4), Row(children: [Text(comments[i]['time'], style: const TextStyle(color: Colors.white54, fontSize: 11)), const SizedBox(width: 12), GestureDetector(onTap: () { setState(() { ctrl.text = '@${comments[i]['name']} '; }); }, child: const Text('رد', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)))])]), trailing: GestureDetector(onTap: () { setState(() { comments[i]['liked'] = !comments[i]['liked']; comments[i]['likes'] += comments[i]['liked'] ? 1 : -1; }); }, child: Column(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.favorite, color: comments[i]['liked'] ? Colors.red : Colors.white, size: 18), Text('${comments[i]['likes']}', style: const TextStyle(color: Colors.white, fontSize: 11))]))); })), const SizedBox(height: 8), Row(children: [Expanded(child: TextField(controller: ctrl, style: const TextStyle(color: Colors.white), decoration: const InputDecoration(hintText: 'اكتب تعليق...', hintStyle: TextStyle(color: Colors.white54), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(25)))))), const SizedBox(width: 8), GestureDetector(onTap: () { if (ctrl.text.trim().isNotEmpty) { setState(() { comments.add({'name': 'انت', 'text': ctrl.text.trim(), 'time': 'الآن', 'likes': 0, 'liked': false}); ctrl.clear(); }); } }, child: Container(padding: const EdgeInsets.all(12), decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle), child: const Icon(Icons.send, color: Colors.white, size: 20)))])]));
+    });
   });
 }
+
