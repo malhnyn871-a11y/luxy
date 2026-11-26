@@ -31,9 +31,9 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 10),
             const Text('شاهد - انشر - استمتع'),
             const SizedBox(height: 30),
-            const TextField(decoration: InputDecoration(hintText: 'الايميل', border: OutlineInputBorder())),
+            TextField(decoration: InputDecoration(hintText: 'الايميل', border: OutlineInputBorder())),
             const SizedBox(height: 12),
-            const TextField(obscureText: true, decoration: InputDecoration(hintText: 'كلمة السر', border: OutlineInputBorder())),
+            TextField(obscureText: true, decoration: InputDecoration(hintText: 'كلمة السر', border: OutlineInputBorder())),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
@@ -69,11 +69,11 @@ class RegisterScreen extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            const TextField(decoration: InputDecoration(hintText: 'الاسم', border: OutlineInputBorder())),
+            TextField(decoration: InputDecoration(hintText: 'الاسم', border: OutlineInputBorder())),
             const SizedBox(height: 12),
-            const TextField(decoration: InputDecoration(hintText: 'الايميل', border: OutlineInputBorder())),
+            TextField(decoration: InputDecoration(hintText: 'الايميل', border: OutlineInputBorder())),
             const SizedBox(height: 12),
-            const TextField(obscureText: true, decoration: InputDecoration(hintText: 'كلمة السر', border: OutlineInputBorder())),
+            TextField(obscureText: true, decoration: InputDecoration(hintText: 'كلمة السر', border: OutlineInputBorder())),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
@@ -270,7 +270,7 @@ class UploadScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(decoration: InputDecoration(hintText: 'اكتب وصف الفيديو', border: OutlineInputBorder())),
+            TextField(decoration: InputDecoration(hintText: 'اكتب وصف الفيديو', border: OutlineInputBorder())),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
@@ -379,8 +379,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(title: const Text('الاعدادات')),
       body: ListView(
         children: [
-          const ListTile(leading: Icon(Icons.person), title: Text('ادارة الحساب'), subtitle: Text('الاسم، الايميل، رقم الهاتف')),
-          const ListTile(leading: Icon(Icons.lock), title: Text('الخصوصية والامان'), subtitle: Text('كلمة السر، التحقق بخطوتين')),
+          ListTile(leading: Icon(Icons.person), title: Text('ادارة الحساب'), subtitle: Text('الاسم، الايميل، رقم الهاتف')),
+          ListTile(leading: Icon(Icons.lock), title: Text('الخصوصية والامان'), subtitle: Text('كلمة السر، التحقق بخطوتين')),
           SwitchListTile(
             title: const Text('التنبيهات'),
             subtitle: const Text('تنبيهات اللايك والتعليق'),
@@ -440,7 +440,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               );
             },
           ),
-          const ListTile(leading: Icon(Icons.info), title: Text('حول لوكسي'), subtitle: Text('النسخة 1.0.0')),
+          ListTile(leading: Icon(Icons.info), title: Text('حول لوكسي'), subtitle: Text('النسخة 1.0.0')),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -477,6 +477,6 @@ class _SaveButtonState extends State<SaveButton> {
 
 void showCommentsSheet(BuildContext context) {
   showModalBottomSheet(context: context, backgroundColor: Colors.grey[900], shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))), builder: (ctx) {
-    return Padding(padding: const EdgeInsets.all(16), child: Column(mainAxisSize: MainAxisSize.min, children: [Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10))), const SizedBox(height: 12), const Text('التعليقات', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)), const SizedBox(height: 12), const ListTile(leading: CircleAvatar(child: Text('س')), title: Text('سارة', style: TextStyle(color: Colors.white)), subtitle: Text('عاشت ايدك', style: TextStyle(color: Colors.white70))), const SizedBox(height: 8), const TextField(style: TextStyle(color: Colors.white), decoration: InputDecoration(hintText: 'اكتب تعليق...', hintStyle: TextStyle(color: Colors.white54), border: OutlineInputBorder(borderRadius: BorderRadius.circular(25))))]));
+    return Padding(padding: const EdgeInsets.all(16), child: Column(mainAxisSize: MainAxisSize.min, children: [Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10))), const SizedBox(height: 12), const Text('التعليقات', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)), const SizedBox(height: 12), ListTile(leading: CircleAvatar(child: Text('س')), title: Text('سارة', style: TextStyle(color: Colors.white)), subtitle: Text('عاشت ايدك', style: TextStyle(color: Colors.white70))), const SizedBox(height: 8), TextField(style: TextStyle(color: Colors.white), decoration: InputDecoration(hintText: 'اكتب تعليق...', hintStyle: TextStyle(color: Colors.white54), border: OutlineInputBorder(borderRadius: BorderRadius.circular(25))))]));
   });
 }
