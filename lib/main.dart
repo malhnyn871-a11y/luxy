@@ -311,6 +311,9 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('@baro'),
+            const Text('صانع محتوى | لوكسي', style: TextStyle(color: Colors.white70, fontSize: 13)),
+            const SizedBox(height: 4),
+            Container(width: 30, height: 3, decoration: BoxDecoration(color: Color(0xFFE11D2E), borderRadius: BorderRadius.circular(10))),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -323,7 +326,7 @@ class ProfileScreen extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(height: 16),
-          Container(padding: const EdgeInsets.all(3), decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xFFE11D2E), width: 2.5)), child: const CircleAvatar(radius: 42, backgroundColor: Colors.white, child: Text('B', style: TextStyle(fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold)))),
+          Container(padding: const EdgeInsets.all(3), decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xFFE11D2E), width: 2.5)), child: const CircleAvatar(radius: 55, backgroundColor: Colors.white, child: Text('B', style: TextStyle(fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold)))),
           const SizedBox(height: 10),
           const Text('بارو', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           const Text('@baro', style: TextStyle(color: Colors.grey)),
@@ -346,7 +349,7 @@ class ProfileScreen extends StatelessWidget {
           const LuxyProfileTabs(),
             Expanded(
             child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 2, mainAxisSpacing: 2),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 6, mainAxisSpacing: 6),
               itemCount: 6,
               itemBuilder: (context, i) {
                 return Container(
@@ -363,7 +366,6 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
   @override
