@@ -1,4 +1,3 @@
-import 'profile_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -106,7 +105,7 @@ class _MainNavState extends State<MainNav> {
     const DiscoverScreen(),
     const UploadScreen(),
     const InboxScreen(),
-    LuxyProfilePage(),
+    const ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
