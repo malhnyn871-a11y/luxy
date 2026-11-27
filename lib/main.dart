@@ -311,9 +311,6 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('@baro'),
-            const Text('صانع محتوى | لوكسي', style: TextStyle(color: Colors.white70, fontSize: 13)),
-            const SizedBox(height: 4),
-            Container(width: 30, height: 3, decoration: BoxDecoration(color: Color(0xFFE11D2E), borderRadius: BorderRadius.circular(10))),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -330,6 +327,8 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 10),
           const Text('بارو', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           const Text('@baro', style: TextStyle(color: Colors.grey)),
+            const Text('CONTENT_CREATOR', style: TextStyle(color: Colors.white70, fontSize: 13)),
+            const SizedBox(height: 4),
           const SizedBox(height: 16),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -365,8 +364,7 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-}
-class SettingsScreen extends StatefulWidget {
+}class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
