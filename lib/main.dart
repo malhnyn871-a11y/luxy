@@ -327,7 +327,7 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 10),
           const Text('بارو', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           const Text('@baro', style: TextStyle(color: Colors.grey)),
-            const Text('\u0635\u0627\u0646\u0639 \u0645\u062d\u062a\u0648\u0649 | \u0644\u0648\u0643\u0633\u064a', style: TextStyle(color: Colors.black70, fontSize: 13)),
+            const Text('\u0635\u0627\u0646\u0639 \u0645\u062d\u062a\u0648\u0649 | \u0644\u0648\u0643\u0633\u064a', style: TextStyle(color: Colors.black54, fontSize: 13)),
             const SizedBox(height: 4),
           const SizedBox(height: 16),
           const Row(
