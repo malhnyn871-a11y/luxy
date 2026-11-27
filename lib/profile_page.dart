@@ -11,7 +11,79 @@ class _LuxyProfilePageState extends State<LuxyProfilePage> {
 
   void showMsg(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(msg), duration: Duration(seconds: 1)),
+      SnackBar(
+        content: Text(msg),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
+
+  Widget highlightCircle(String label, Color color) {
+    return GestureDetector(
+      onTap: () => showMsg("ستوري $label"),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8),
+        child: Column(
+          children: [
+            Container(
+              width: 55,
+              height: 55,
+              decoration: BoxDecoration(
+                color: color,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Text(
+                  label[0],
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 4),
+            Text(label, style: TextStyle(fontSize: 12)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget videoBox(Color color, String views, int index) {
+    return GestureDetector(
+      onTap: () => showMsg("تشغيل فيديو $index"),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          Container(color: color),
+          Center(
+            child: Icon(
+              Icons.play_circle_fill,
+              color: Colors.white,
+              size: 40,
+            ),
+          ),
+          Positioned(
+            bottom: 4,
+            left: 4,
+            child: Row(
+              children: [
+                Icon(Icons.play_arrow, color: Colors.white, size: 14),
+                Text(
+                  views,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -28,6 +100,10 @@ class _LuxyProfilePageState extends State<LuxyProfilePage> {
         ),
         actions: [
           IconButton(
+            icon: Icon(Icons.person_add_outlined, color: Colors.black),
+            onPressed: () => showMsg("اضافة صديق"),
+          ),
+          IconButton(
             icon: Icon(Icons.notifications_none, color: Colors.black),
             onPressed: () => showMsg("التنبيهات"),
           ),
@@ -40,32 +116,101 @@ class _LuxyProfilePageState extends State<LuxyProfilePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 10),
-            Container(
-              width: 90,
-              height: 90,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.red, width: 3),
-              ),
-              child: Center(
-                child: Text("م", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(12),
+                  child: GestureDetector(
+                    onTap: () => showMsg("تغيير الصورة"),
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.red, width: 3),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "م",
+                              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(Icons.add, color: Colors.white, size: 20),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 8),
+                      Text(
+                        "محمد التميمي",
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                      Text("@m_fb2", style: TextStyle(color: Colors.black54)),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          GestureDetector(
+                            onTap: () => showMsg("قائمة المتابعين"),
+                            child: Column(
+                              children: [
+                                Text("153", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                Text("متابع", style: TextStyle(color: Colors.black54, fontSize: 12)),
+                              ],
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () => showMsg("قائمة المتابعين"),
+                            child: Column(
+                              children: [
+                                Text("4217", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                Text("متابعون", style: TextStyle(color: Colors.black54, fontSize: 12)),
+                              ],
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () => showMsg("قائمة الاعجابات"),
+                            child: Column(
+                              children: [
+                                Text("106 الف", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                Text("اعجاب", style: TextStyle(color: Colors.black54, fontSize: 12)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Text(
+                "تابعني راح اشوفك هواي شغلات حلوة",
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(height: 8),
-            Text("محمد التميمي", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            Text("@m_fb2", style: TextStyle(color: Colors.black54)),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text("153 متابع"),
-                Text("4217 متابعون"),
-                Text("106 الف اعجاب"),
-              ],
-            ),
-            SizedBox(height: 12),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: Row(
@@ -114,31 +259,38 @@ class _LuxyProfilePageState extends State<LuxyProfilePage> {
               ),
             ),
             SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(onTap: () => showMsg("ستوري سفر"), child: Text("سفر")),
-                GestureDetector(onTap: () => showMsg("ستوري طعام"), child: Text("طعام")),
-                GestureDetector(onTap: () => showMsg("ستوري ازياء"), child: Text("ازياء")),
-                GestureDetector(onTap: () => showMsg("ستوري يوميات"), child: Text("يوميات")),
-                GestureDetector(onTap: () => showMsg("ستوري رياضة"), child: Text("رياضة")),
-              ],
+            SizedBox(
+              height: 80,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  highlightCircle("سفر", Colors.orange),
+                  highlightCircle("طعام", Colors.pink),
+                  highlightCircle("ازياء", Colors.purple),
+                  highlightCircle("يوميات", Colors.blue),
+                  highlightCircle("رياضة", Colors.green),
+                ],
+              ),
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 10),
             Divider(),
             GridView.count(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               crossAxisCount: 3,
-              crossAxisSpacing: 2,
-              mainAxisSpacing: 2,
+              crossAxisSpacing: 1,
+              mainAxisSpacing: 1,
+              childAspectRatio: 0.75,
               children: [
-                GestureDetector(onTap: () => showMsg("تشغيل فيديو 1"), child: Container(color: Colors.red, child: Center(child: Icon(Icons.play_circle_fill, color: Colors.white, size: 40)))),
-                GestureDetector(onTap: () => showMsg("تشغيل فيديو 2"), child: Container(color: Colors.pink, child: Center(child: Icon(Icons.play_circle_fill, color: Colors.white, size: 40)))),
-                GestureDetector(onTap: () => showMsg("تشغيل فيديو 3"), child: Container(color: Colors.purple, child: Center(child: Icon(Icons.play_circle_fill, color: Colors.white, size: 40)))),
-                GestureDetector(onTap: () => showMsg("تشغيل فيديو 4"), child: Container(color: Colors.blue, child: Center(child: Icon(Icons.play_circle_fill, color: Colors.white, size: 40)))),
-                GestureDetector(onTap: () => showMsg("تشغيل فيديو 5"), child: Container(color: Colors.orange, child: Center(child: Icon(Icons.play_circle_fill, color: Colors.white, size: 40)))),
-                GestureDetector(onTap: () => showMsg("تشغيل فيديو 6"), child: Container(color: Colors.teal, child: Center(child: Icon(Icons.play_circle_fill, color: Colors.white, size: 40)))),
+                videoBox(Colors.red, "4.8 مليون", 1),
+                videoBox(Colors.pink, "16.7 الف", 2),
+                videoBox(Colors.purple, "1.0 الف", 3),
+                videoBox(Colors.deepPurple, "324", 4),
+                videoBox(Colors.blue, "309", 5),
+                videoBox(Colors.lightBlue, "401", 6),
+                videoBox(Colors.orange, "310", 7),
+                videoBox(Colors.teal, "465", 8),
+                videoBox(Colors.green, "2257", 9),
               ],
             ),
           ],
