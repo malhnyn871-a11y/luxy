@@ -106,7 +106,7 @@ class _MainNavState extends State<MainNav> {
     const DiscoverScreen(),
     const UploadScreen(),
     const InboxScreen(),
-    const LuxyProfilePage(),
+    LuxyProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LuxyProfilePage extends StatelessWidget {
-  const LuxyProfilePage({super.key});
+  LuxyProfilePage({super.key});
 
   final List<Map<String, dynamic>> highlights = [
     {"label": "سفر", "color": Colors.orange},
