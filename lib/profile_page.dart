@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 
 class LuxyProfilePage extends StatelessWidget {
   LuxyProfilePage({super.key});
