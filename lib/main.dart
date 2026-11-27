@@ -320,14 +320,14 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
           Container(padding: const EdgeInsets.all(3), decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xFFE11D2E), width: 2.5)), child: const CircleAvatar(radius: 55, backgroundColor: Colors.white, child: Text('B', style: TextStyle(fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold)))),
           const SizedBox(height: 10),
           const Text('بارو', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           const Text('@baro', style: TextStyle(color: Colors.grey)),
-            const Text('CONTENT_CREATOR', style: TextStyle(color: Colors.white70, fontSize: 13)),
+            const Text('\u0635\u0627\u0646\u0639 \u0645\u062d\u062a\u0648\u0649 | \u0644\u0648\u0643\u0633\u064a', style: TextStyle(color: Colors.black70, fontSize: 13)),
             const SizedBox(height: 4),
           const SizedBox(height: 16),
           const Row(
@@ -345,7 +345,9 @@ class ProfileScreen extends StatelessWidget {
             child: const Text('تعديل الملف', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
           ),
           const SizedBox(height: 16),
-          const LuxyProfileTabs(),
+          OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.history, color: Colors.black, size: 18), label: const Text('\u0633\u062c\u0644 \u0627\u0644\u0645\u0634\u0627\u0647\u062f\u0629', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)), style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.black12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)), padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10))),
+            const SizedBox(height: 8),
+            const LuxyProfileTabs(),
             Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 6, mainAxisSpacing: 6),
@@ -492,6 +494,8 @@ void showCommentsSheet(BuildContext context) {
 
 
 
+
+
 class LuxyProfileTabs extends StatefulWidget {
   const LuxyProfileTabs({super.key});
   @override State<LuxyProfileTabs> createState() => _LuxyProfileTabsState();
@@ -499,16 +503,16 @@ class LuxyProfileTabs extends StatefulWidget {
 class _LuxyProfileTabsState extends State<LuxyProfileTabs> {
   int selected = 0;
   final List<Map<String, dynamic>> tabs = [
-    {'icon': Icons.grid_on, 'label': 'فيديوهات'},
-    {'icon': Icons.favorite, 'label': 'لايكات'},
-    {'icon': Icons.bookmark, 'label': 'محفوظات'},
-    {'icon': Icons.lock, 'label': 'خاص'},
-    {'icon': Icons.repeat, 'label': 'إعادة'},
+    {'icon': Icons.grid_on, 'label': 'VIDEOS'},
+    {'icon': Icons.favorite, 'label': 'LIKES'},
+    {'icon': Icons.bookmark, 'label': 'SAVED'},
+    {'icon': Icons.lock, 'label': 'PRIVATE'},
+    {'icon': Icons.repeat, 'label': 'REPOST'},
   ];
   @override Widget build(BuildContext context) {
-    return Container(margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 10), padding: const EdgeInsets.all(4), decoration: BoxDecoration(color: const Color(0xFF111111), borderRadius: BorderRadius.circular(30), border: Border.all(color: Colors.white12, width: 0.5)), child: Row(children: List.generate(tabs.length, (i) {
+    return Container(color: Colors.white, child: Row(children: List.generate(tabs.length, (i) {
       bool active = selected == i;
-      return Expanded(child: GestureDetector(onTap: () { setState(() { selected = i; }); }, child: Container(padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 2), decoration: BoxDecoration(color: active ? Colors.white : Colors.transparent, borderRadius: BorderRadius.circular(26)), child: Column(mainAxisSize: MainAxisSize.min, children: [Row(mainAxisSize: MainAxisSize.min, children: [Icon(tabs[i]['icon'], color: active ? Colors.black : Colors.white, size: 16), const SizedBox(width: 3), Text(tabs[i]['label'], style: TextStyle(color: active ? Colors.black : Colors.white, fontWeight: FontWeight.bold, fontSize: 11))]), if (active) Container(margin: const EdgeInsets.only(top: 4), width: 5, height: 5, decoration: const BoxDecoration(color: Color(0xFFE11D2E), shape: BoxShape.circle))]))));
+      return Expanded(child: GestureDetector(onTap: () { setState(() { selected = i; }); }, child: Container(padding: const EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(border: Border(bottom: BorderSide(color: active ? const Color(0xFFE11D2E) : Colors.transparent, width: 2.5))), child: Icon(tabs[i]['icon'], color: active ? Colors.black : Colors.grey, size: 22))));
     })));
   }
 }
