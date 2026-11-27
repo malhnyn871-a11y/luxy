@@ -320,14 +320,14 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 16),
           Container(padding: const EdgeInsets.all(3), decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xFFE11D2E), width: 2.5)), child: const CircleAvatar(radius: 55, backgroundColor: Colors.white, child: Text('B', style: TextStyle(fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold)))),
           const SizedBox(height: 10),
           const Text('بارو', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           const Text('@baro', style: TextStyle(color: Colors.grey)),
-            const Text('\u0635\u0627\u0646\u0639 \u0645\u062d\u062a\u0648\u0649 | \u0644\u0648\u0643\u0633\u064a', style: TextStyle(color: Colors.black54, fontSize: 13)),
+            const Text('\u0635\u0627\u0646\u0639 \u0645\u062d\u062a\u0648\u0649 | \u0644\u0648\u0643\u0633\u064a', style: TextStyle(color: Colors.white70, fontSize: 13)),
             const SizedBox(height: 4),
           const SizedBox(height: 16),
           const Row(
@@ -345,7 +345,7 @@ class ProfileScreen extends StatelessWidget {
             child: const Text('تعديل الملف', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
           ),
           const SizedBox(height: 16),
-          OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.history, color: Colors.black, size: 18), label: const Text('\u0633\u062c\u0644 \u0627\u0644\u0645\u0634\u0627\u0647\u062f\u0629', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)), style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.black12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)), padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10))),
+          OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.history, color: Colors.white, size: 18), label: const Text('\u0633\u062c\u0644 \u0627\u0644\u0645\u0634\u0627\u0647\u062f\u0629', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.white12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)), padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10))),
             const SizedBox(height: 8),
             const LuxyProfileTabs(),
             Expanded(
