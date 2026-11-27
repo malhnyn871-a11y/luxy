@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class LuxyProfilePage extends StatelessWidget {
   LuxyProfilePage({super.key});
@@ -52,7 +51,7 @@ class LuxyProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 8),
-                      Text("محمد التميمي", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                      Text("محمد التميمي", style: TextStyle(color: Colors.black, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                       Text("@m_fb2", style: TextStyle(color: Colors.grey)),
                       SizedBox(height: 10),
                       Row(
