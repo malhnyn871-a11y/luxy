@@ -18,6 +18,9 @@ class _StoryState extends State<StoryPage> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('تم ارسال رد على ستوريك: ' + replyC.text), backgroundColor: Colors.red));
     replyC.clear();
   }
+  void deleteStory() {
+    showDialog(context: context, builder: (_) => AlertDialog(title: const Text('حذف القصة'), content: Text('هل تريد حذف قصة ' + widget.title + ' ؟'), actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('الغاء')), TextButton(onPressed: () { Navigator.pop(context); Navigator.pop(context, true); }, child: const Text('نعم حذف', style: TextStyle(color: Colors.red)))]));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
