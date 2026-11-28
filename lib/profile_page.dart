@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'settings_page.dart';
+import 'edit_profile_page.dart';
 class LuxyProfilePage extends StatefulWidget {
 LuxyProfilePage({super.key});
 @override
@@ -32,7 +33,7 @@ final List<Map<String, dynamic>> myVideos = [
 Widget build(BuildContext context) {
 return Scaffold(
 backgroundColor: Colors.black,
-appBar: AppBar(backgroundColor: Colors.black, elevation: 0, leading: IconButton(icon: Icon(Icons.menu, color: Colors.white), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsPage()))), title: Text('Luxy', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), actions: [IconButton(icon: Icon(Icons.person_add_outlined, color: Colors.white), onPressed: () => showMsg('اضافة')), IconButton(icon: Icon(Icons.notifications_none, color: Colors.white), onPressed: () => showMsg('الاشعارات')), IconButton(icon: Icon(Icons.edit_outlined, color: Colors.white), onPressed: () => showMsg('تعديل'))]),
+appBar: AppBar(backgroundColor: Colors.black, elevation: 0, leading: IconButton(icon: Icon(Icons.menu, color: Colors.white), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsPage()))), title: Text('Luxy', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), actions: [IconButton(icon: Icon(Icons.person_add_outlined, color: Colors.white), onPressed: () => showMsg('اضافة')), IconButton(icon: Icon(Icons.notifications_none, color: Colors.white), onPressed: () => showMsg('الاشعارات')), IconButton(icon: Icon(Icons.edit, color: Colors.white), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfilePage())),
 body: SingleChildScrollView(
 child: Column(children: [
 SizedBox(height: 12),
