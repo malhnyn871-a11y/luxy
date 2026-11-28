@@ -24,7 +24,7 @@ class _EditState extends State<EditProfilePage> {
         const SizedBox(height: 15),
         _field('النبذة', bioC, maxLines: 3),
         const SizedBox(height: 20),
-        SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('تم حفظ التعديل'), backgroundColor: Colors.red)); Navigator.pop(context); }, child: const Text('حفظ', style: TextStyle(color: Colors.white)))),
+        SizedBox(width: double.infinity, child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('تم حفظ التعديل'), backgroundColor: Colors.red)); Navigator.pop(context, {"name": nameC.text, "user": userC.text, "bio": bioC.text}); }, child: const Text('حفظ', style: TextStyle(color: Colors.white)))),
       ])),
     );
   }
