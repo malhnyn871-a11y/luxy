@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'settings_page.dart';
 class LuxyProfilePage extends StatefulWidget {
 LuxyProfilePage({super.key});
 @override
