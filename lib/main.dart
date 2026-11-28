@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFB800FF)),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 onPressed: () {
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainNav()));
                 },
@@ -51,7 +51,7 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen()));
               },
-              child: const Text('انشاء حساب جديد', style: TextStyle(color: Color(0xFFB800FF))),
+              child: const Text('انشاء حساب جديد', style: TextStyle(color: Colors.red)),
             ),
           ],
         ),
@@ -79,7 +79,7 @@ class RegisterScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFB800FF)),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 onPressed: () {
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainNav()));
                 },
@@ -115,7 +115,7 @@ class _MainNavState extends State<MainNav> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: idx,
         backgroundColor: Colors.black,
-        selectedItemColor: Color(0xFFB800FF),
+        selectedItemColor: Colors.red,
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
         onTap: (i) {
@@ -193,7 +193,7 @@ class _ReelsScreenState extends State<ReelsScreen> {
               const SizedBox(height: 18),
               IconButton(
                 onPressed: onLike,
-                icon: Icon(liked ? Icons.favorite : Icons.favorite, color: liked ? Color(0xFFB800FF) : Colors.white, size: 44),
+                icon: Icon(liked ? Icons.favorite : Icons.favorite, color: liked ? Colors.red : Colors.white, size: 44),
               ),
               Text('$likes', style: const TextStyle(color: Colors.white)),
               const SizedBox(height: 12),
@@ -276,7 +276,7 @@ class UploadScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFB800FF)),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 onPressed: () {},
                 child: const Text('نشر', style: TextStyle(color: Colors.white)),
               ),
@@ -389,7 +389,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: const Text('التنبيهات'),
             subtitle: const Text('تنبيهات اللايك والتعليق'),
             value: notif,
-            activeColor: Color(0xFFB800FF),
+            activeColor: Colors.red,
             onChanged: (v) {
               setState(() {
                 notif = v;
@@ -399,7 +399,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SwitchListTile(
             title: const Text('الوضع الليلي'),
             value: dark,
-            activeColor: Color(0xFFB800FF),
+            activeColor: Colors.red,
             onChanged: (v) {
               setState(() {
                 dark = v;
@@ -451,7 +451,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFB800FF)),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false);
                 },
@@ -485,7 +485,7 @@ void showCommentsSheet(BuildContext context) {
   TextEditingController ctrl = TextEditingController();
   showModalBottomSheet(context: context, isScrollControlled: true, backgroundColor: Colors.grey[900], shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))), builder: (ctx) {
     return StatefulBuilder(builder: (ctx2, setState) {
-      return Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(ctx2).viewInsets.bottom, left: 16, right: 16, top: 16), child: Column(mainAxisSize: MainAxisSize.min, children: [Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10))), const SizedBox(height: 12), const Text('التعليقات', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)), const SizedBox(height: 12), SizedBox(height: 250, child: ListView.builder(itemCount: comments.length, itemBuilder: (c, i) { return ListTile(leading: CircleAvatar(child: Text(comments[i]['name'][0])), title: Text(comments[i]['name'], style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(comments[i]['text'], style: const TextStyle(color: Colors.white)), const SizedBox(height: 4), Row(children: [Text(comments[i]['time'], style: const TextStyle(color: Colors.white54, fontSize: 11)), const SizedBox(width: 12), GestureDetector(onTap: () { setState(() { ctrl.text = '@${comments[i]['name']} '; }); }, child: const Text('رد', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)))])]), trailing: GestureDetector(onTap: () { setState(() { comments[i]['liked'] = !comments[i]['liked']; comments[i]['likes'] += comments[i]['liked'] ? 1 : -1; }); }, child: Column(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.favorite, color: comments[i]['liked'] ? Color(0xFFB800FF) : Colors.white, size: 18), Text('${comments[i]['likes']}', style: const TextStyle(color: Colors.white, fontSize: 11))]))); })), const SizedBox(height: 8), Row(children: [Expanded(child: TextField(controller: ctrl, style: const TextStyle(color: Colors.white), decoration: const InputDecoration(hintText: 'اكتب تعليق...', hintStyle: TextStyle(color: Colors.white54), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(25)))))), const SizedBox(width: 8), GestureDetector(onTap: () { if (ctrl.text.trim().isNotEmpty) { setState(() { comments.add({'name': 'انت', 'text': ctrl.text.trim(), 'time': 'الآن', 'likes': 0, 'liked': false}); ctrl.clear(); }); } }, child: Container(padding: const EdgeInsets.all(12), decoration: const BoxDecoration(color: Color(0xFFB800FF), shape: BoxShape.circle), child: const Icon(Icons.send, color: Colors.white, size: 20)))])]));
+      return Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(ctx2).viewInsets.bottom, left: 16, right: 16, top: 16), child: Column(mainAxisSize: MainAxisSize.min, children: [Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10))), const SizedBox(height: 12), const Text('التعليقات', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)), const SizedBox(height: 12), SizedBox(height: 250, child: ListView.builder(itemCount: comments.length, itemBuilder: (c, i) { return ListTile(leading: CircleAvatar(child: Text(comments[i]['name'][0])), title: Text(comments[i]['name'], style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(comments[i]['text'], style: const TextStyle(color: Colors.white)), const SizedBox(height: 4), Row(children: [Text(comments[i]['time'], style: const TextStyle(color: Colors.white54, fontSize: 11)), const SizedBox(width: 12), GestureDetector(onTap: () { setState(() { ctrl.text = '@${comments[i]['name']} '; }); }, child: const Text('رد', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)))])]), trailing: GestureDetector(onTap: () { setState(() { comments[i]['liked'] = !comments[i]['liked']; comments[i]['likes'] += comments[i]['liked'] ? 1 : -1; }); }, child: Column(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.favorite, color: comments[i]['liked'] ? Colors.red : Colors.white, size: 18), Text('${comments[i]['likes']}', style: const TextStyle(color: Colors.white, fontSize: 11))]))); })), const SizedBox(height: 8), Row(children: [Expanded(child: TextField(controller: ctrl, style: const TextStyle(color: Colors.white), decoration: const InputDecoration(hintText: 'اكتب تعليق...', hintStyle: TextStyle(color: Colors.white54), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(25)))))), const SizedBox(width: 8), GestureDetector(onTap: () { if (ctrl.text.trim().isNotEmpty) { setState(() { comments.add({'name': 'انت', 'text': ctrl.text.trim(), 'time': 'الآن', 'likes': 0, 'liked': false}); ctrl.clear(); }); } }, child: Container(padding: const EdgeInsets.all(12), decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle), child: const Icon(Icons.send, color: Colors.white, size: 20)))])]));
     });
   });
 }
