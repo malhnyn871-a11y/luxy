@@ -31,7 +31,16 @@ final List<Map<String, dynamic>> myVideos = [
 {"views": "2257", "color": Colors.green},
 ];
 @override
-Widget build(BuildContext context) {
+  void addHighlight() {
+    final c = TextEditingController();
+    showDialog(context: context, builder: (_) => AlertDialog(title: const Text('اضافة هايلايت جديد'), content: TextField(controller: c, decoration: const InputDecoration(hintText: 'اسم الهايلايت')), actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('الغاء')), TextButton(onPressed: () { if (c.text.trim().isNotEmpty) { setState(() { highlights.add({'label': c.text.trim(), 'color': Colors.purple}); }); } Navigator.pop(context); }, child: const Text('حفظ'))]));
+  }
+  void editHighlight(int index) {
+    final h = highlights[index];
+    final c = TextEditingController(text: h['label']);
+    showDialog(context: context, builder: (_) => AlertDialog(title: Text('تعديل ' + h['label']), content: TextField(controller: c, decoration: const InputDecoration(hintText: 'اسم جديد')), actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('الغاء')), TextButton(onPressed: () { if (c.text.trim().isNotEmpty) { setState(() { highlights[index]['label'] = c.text.trim(); }); } Navigator.pop(context); }, child: const Text('حفظ')), TextButton(onPressed: () { setState(() { highlights.removeAt(index); }); Navigator.pop(context); }, child: const Text('حذف', style: TextStyle(color: Colors.red)))]));
+  }
+  Widget build(BuildContext context) {
 return Scaffold(
 backgroundColor: Colors.black,
 appBar: AppBar(backgroundColor: Colors.black, elevation: 0, leading: IconButton(icon: Icon(Icons.menu, color: Colors.white), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsPage()))), title: Text('Luxy', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), actions: [IconButton(icon: Icon(Icons.person_add_outlined, color: Colors.white), onPressed: () => showMsg('اضافة')), IconButton(icon: Icon(Icons.notifications_none, color: Colors.white), onPressed: () => showMsg('الاشعارات')), IconButton(icon: Icon(Icons.edit_outlined, color: Colors.white), onPressed: () async { final r = await Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfilePage())); if (r != null) { setState(() { _name = r["name"] ?? _name; _user = r["user"] ?? _user; _bio = r["bio"] ?? _bio; }); } })]),
