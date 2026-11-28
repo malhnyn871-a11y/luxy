@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'settings_page.dart';
 import 'edit_profile_page.dart';
+import 'story_page.dart';
 class LuxyProfilePage extends StatefulWidget {
 LuxyProfilePage({super.key});
 @override
@@ -48,7 +49,7 @@ Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Row(children: [Exp
 SizedBox(height: 12),
 Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Text(_bio, textAlign: TextAlign.center, style: TextStyle(color: Colors.white))),
 SizedBox(height: 12),
-SizedBox(height: 80, child: ListView.builder(scrollDirection: Axis.horizontal, itemCount: highlights.length, itemBuilder: (context, index) { final h = highlights[index]; return GestureDetector(onTap: () => showMsg('ستوري'), child: Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Column(children: [Container(width: 60, height: 60, decoration: BoxDecoration(color: h['color'], shape: BoxShape.circle, border: Border.all(color: Colors.red, width: 2)), child: Center(child: Text(h['label'][0], style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)))), SizedBox(height: 4), Text(h['label'], style: TextStyle(color: Colors.white, fontSize: 12))]))); })),
+SizedBox(height: 80, child: ListView.builder(scrollDirection: Axis.horizontal, itemCount: highlights.length, itemBuilder: (context, index) { final h = highlights[index]; return GestureDetector(onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => StoryPage(title: h['label'], color: h['color']))), child: Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Column(children: [Container(width: 60, height: 60, decoration: BoxDecoration(color: h['color'], shape: BoxShape.circle, border: Border.all(color: Colors.red, width: 2)), child: Center(child: Text(h['label'][0], style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)))), SizedBox(height: 4), Text(h['label'], style: TextStyle(color: Colors.white, fontSize: 12))]))); })),
 SizedBox(height: 10),
 Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [GestureDetector(onTap: () { setState(() { selectedTab = 0; }); }, child: Icon(Icons.grid_on, color: selectedTab == 0 ? Colors.red : Colors.grey)), GestureDetector(onTap: () { setState(() { selectedTab = 1; }); }, child: Icon(selectedTab == 1 ? Icons.favorite : Icons.favorite_border, color: selectedTab == 1 ? Colors.red : Colors.grey)), GestureDetector(onTap: () { setState(() { selectedTab = 2; }); }, child: Icon(Icons.repeat, color: selectedTab == 2 ? Colors.red : Colors.grey)), GestureDetector(onTap: () { setState(() { selectedTab = 3; }); }, child: Icon(selectedTab == 3 ? Icons.lock : Icons.lock_outline, color: selectedTab == 3 ? Colors.red : Colors.grey)), GestureDetector(onTap: () { setState(() { selectedTab = 4; }); }, child: Icon(Icons.menu, color: selectedTab == 4 ? Colors.red : Colors.grey))]),
 Divider(color: Colors.grey[800]),
