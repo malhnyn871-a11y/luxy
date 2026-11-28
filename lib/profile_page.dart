@@ -7,7 +7,7 @@ LuxyProfilePage({super.key});
 State<LuxyProfilePage> createState() => _LuxyProfilePageState();
 }
 class _LuxyProfilePageState extends State<LuxyProfilePage> {
-String _name=_name; String _user=_user; String _bio=_bio; bool isFollowing = false; int selectedTab = 0;
+String _name='محمد التميمي'; String _user='@m_fb2'; String _bio='تابعني راح اشوفك هواي شغلات حلوة كوميدي، تحشيش، الشهر الأول'; bool isFollowing = false; int selectedTab = 0;
 void showMsg(String m) {
 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(m), duration: Duration(seconds: 1)));
 }
