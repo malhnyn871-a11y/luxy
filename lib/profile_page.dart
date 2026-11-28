@@ -5,7 +5,7 @@ LuxyProfilePage({super.key});
 State<LuxyProfilePage> createState() => _LuxyProfilePageState();
 }
 class _LuxyProfilePageState extends State<LuxyProfilePage> {
-bool isFollowing = false;
+bool isFollowing = false; int selectedTab = 0;
 void showMsg(String m) {
 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(m), duration: Duration(seconds: 1)));
 }
@@ -48,7 +48,7 @@ Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Text('تابعني
 SizedBox(height: 12),
 SizedBox(height: 80, child: ListView.builder(scrollDirection: Axis.horizontal, itemCount: highlights.length, itemBuilder: (context, index) { final h = highlights[index]; return GestureDetector(onTap: () => showMsg('ستوري'), child: Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Column(children: [Container(width: 60, height: 60, decoration: BoxDecoration(color: h['color'], shape: BoxShape.circle, border: Border.all(color: Colors.red, width: 2)), child: Center(child: Text(h['label'][0], style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)))), SizedBox(height: 4), Text(h['label'], style: TextStyle(color: Colors.white, fontSize: 12))]))); })),
 SizedBox(height: 10),
-Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Icon(Icons.grid_on, color: Colors.white), Icon(Icons.favorite_border, color: Colors.grey), Icon(Icons.repeat, color: Colors.grey), Icon(Icons.lock_outline, color: Colors.grey), Icon(Icons.menu, color: Colors.grey)]),
+Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Icon(Icons.grid_on, color: Colors.white), GestureDetector(onTap: () { setState(() { selectedTab = 1; }); }, child: Icon(selectedTab == 1 ? Icons.favorite : Icons.favorite_border, color: selectedTab == 1 ? Colors.red : Colors.grey)), GestureDetector(onTap: () { setState(() { selectedTab = 2; }); }, child: Icon(Icons.repeat, color: selectedTab == 2 ? Colors.red : Colors.grey)), GestureDetector(onTap: () { setState(() { selectedTab = 3; }); }, child: Icon(selectedTab == 3 ? Icons.lock : Icons.lock_outline, color: selectedTab == 3 ? Colors.red : Colors.grey)), Icon(Icons.menu, color: Colors.grey)]),
 Divider(color: Colors.grey[800]),
 GridView.builder(shrinkWrap: true, physics: NeverScrollableScrollPhysics(), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 2, mainAxisSpacing: 2, childAspectRatio: 0.75), itemCount: myVideos.length, itemBuilder: (context, index) { final video = myVideos[index]; return GestureDetector(onTap: () => showMsg('تشغيل فيديو'), child: Stack(fit: StackFit.expand, children: [Container(color: video['color']), Center(child: Icon(Icons.play_circle_fill, color: Colors.white, size: 40)), Positioned(bottom: 4, left: 4, child: Row(children: [Icon(Icons.play_arrow, color: Colors.white, size: 14), Text(video['views'], style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold))]))])); }),
 ])),
