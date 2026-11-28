@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'settings_page.dart';
 import 'edit_profile_page.dart';
+import 'edit_profile_page.dart';
 class LuxyProfilePage extends StatefulWidget {
 LuxyProfilePage({super.key});
 @override
@@ -44,7 +45,7 @@ Text('@m_fb2', style: TextStyle(color: Colors.grey, fontSize: 16)),
 SizedBox(height: 12),
 Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [_stat('153', 'متابع'), _stat('4217', 'متابعون'), _stat('106 ألف', 'إعجاب')]),
 SizedBox(height: 12),
-Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Row(children: [Expanded(child: GestureDetector(onTap: () { setState(() { isFollowing = !isFollowing; }); showMsg(isFollowing ? 'تمت المتابعة' : 'تم الغاء المتابعة'); }, child: Container(padding: EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(10)), child: Center(child: Text(isFollowing ? 'متابع' : 'متابعة', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)))))), SizedBox(width: 10), Expanded(child: GestureDetector(onTap: () => showMsg('الرسائل'), child: Container(padding: EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(color: Colors.grey[800], borderRadius: BorderRadius.circular(10)), child: Center(child: Text('الرسائل', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold))))))])),
+Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Row(children: [Expanded(child: GestureDetector(onTap: () { setState(() { isFollowing = !isFollowing; }) }, child: Container(padding: EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(10)), child: Center(child: Text(isFollowing ? 'متابع' : 'متابعة', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)))))), SizedBox(width: 10), Expanded(child: GestureDetector(onTap: () => showMsg('الرسائل'), child: Container(padding: EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(color: Colors.grey[800], borderRadius: BorderRadius.circular(10)), child: Center(child: Text('الرسائل', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold))))))])),
 SizedBox(height: 12),
 Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Text('تابعني راح اشوفك هواي شغلات حلوة\nكوميدي، تحشيش، الشهر الأول', textAlign: TextAlign.center, style: TextStyle(color: Colors.white))),
 SizedBox(height: 12),
